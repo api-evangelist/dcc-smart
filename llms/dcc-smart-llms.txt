@@ -1,0 +1,75 @@
+# Smart DCC
+
+> Smart DCC (the Data Communications Company) is the Ofgem-licensed monopoly that operates Britain's national smart metering communications network, connecting electricity and gas smart meters to energy suppliers, network operators and other authorised users over a single secure wide-area network. It is shared national infrastructure, not a retailer or a data marketplace, and it is regulated through the Smart Meter Communication Licence and governed by the Smart Energy Code.
+
+Generated 2026-07-27 by API Evangelist (https://apievangelist.com) from the Smart DCC public surface. Smart DCC publishes no llms.txt of its own — https://www.smartdcc.co.uk/llms.txt returns 404.
+
+## What is and is not available to a developer
+
+- The production interface is DUIS (the DCC User Interface Specification), an XML web service reached over a dedicated DCC User Gateway Connection. The specification and its XML schema are published openly as Smart Energy Code subsidiary documents, but the gateway is closed to anyone who has not acceded to the Smart Energy Code and passed SMKI and User Entry Process Testing. There is no self-serve signup, no API key and no sandbox key.
+- Britain mandated the infrastructure, not a consumer data right. There is no UK equivalent of the Australian Consumer Data Right for energy and no Green Button regulation, so Smart DCC operates no consumer data-portability API.
+- Network statistics and performance are published as rendered web pages with no documented open-data API or bulk download.
+- The only self-serve, machine-readable API contract Smart DCC publishes anywhere is the OpenAPI for the open-source DCC Boxed DUIS signing and validation tool, which runs locally.
+
+## APIs
+
+- [DCC Boxed DUIS Signing Tool API](https://github.com/SmartDCCInnovation/dccboxed-signing-tool): Two operations — POST /sign adds an XML digital signature to a Base64-encoded unsigned DUIS request (optional preserveCounter flag), POST /verify validates the signature on a DUIS response and strips it. Self-hosted; default http://localhost:8080. No authentication. Ships the ZAZ1 test SMKI certificates and performs DUIS XSD validation.
+
+## Specs
+
+- [OpenAPI 3.0.3 — DCC Boxed DUIS Signing Tool](https://raw.githubusercontent.com/api-evangelist/dcc-smart/refs/heads/main/openapi/dcc-boxed-duis-signing-tool-openapi.yml)
+- [OpenAPI Overlay — API Evangelist enhancements](https://raw.githubusercontent.com/api-evangelist/dcc-smart/refs/heads/main/overlays/dcc-smart-dcc-boxed-duis-signing-tool-overlay.yaml)
+- [JSON Schema — DCC Boxed keystore database (2020-12)](https://raw.githubusercontent.com/api-evangelist/dcc-smart/refs/heads/main/json-schema/dcc-smart-dccboxed-keystore-schema.json)
+- [DCC User Interface Specification V5.3, 18 March 2025 (PDF)](https://www.smartdcc.co.uk/media/d5kh4khf/dcc-user-interface-specification-v53-18-mar-2025.pdf)
+- [SEC Appendix AD — DUIS](https://smartenergycodecompany.co.uk/documents/sec-subsidiary-documents/sec-appendix-ad-dcc-user-interface-specification-duis/)
+- [SEC Appendix AE — DCC User Interface Code of Connection](https://smartenergycodecompany.co.uk/documents/sec-subsidiary-documents/sec-appendix-ae-dcc-user-interface-code-of-connection/)
+- [DUIS XML Schema V5.1](https://www.smartdcc.co.uk/media/6490/duis-xml-schema-v51.docx)
+
+## API Evangelist artifacts
+
+- [Authentication profile](https://raw.githubusercontent.com/api-evangelist/dcc-smart/refs/heads/main/authentication/dcc-smart-authentication.yml)
+- [API conventions](https://raw.githubusercontent.com/api-evangelist/dcc-smart/refs/heads/main/conventions/dcc-smart-conventions.yml)
+- [Error catalog](https://raw.githubusercontent.com/api-evangelist/dcc-smart/refs/heads/main/errors/dcc-smart-problem-types.yml)
+- [Lifecycle, status and roadmap](https://raw.githubusercontent.com/api-evangelist/dcc-smart/refs/heads/main/lifecycle/dcc-smart-lifecycle.yml)
+- [Changelog](https://raw.githubusercontent.com/api-evangelist/dcc-smart/refs/heads/main/changelog/dcc-smart-changelog.yml)
+- [Packages and SDKs](https://raw.githubusercontent.com/api-evangelist/dcc-smart/refs/heads/main/packages/dcc-smart-packages.yml)
+- [CLI surface](https://raw.githubusercontent.com/api-evangelist/dcc-smart/refs/heads/main/cli/dcc-smart-cli.yml)
+- [Node-RED components](https://raw.githubusercontent.com/api-evangelist/dcc-smart/refs/heads/main/components/dcc-smart-components.yml)
+- [Sandbox and ZAZ1 test PKI](https://raw.githubusercontent.com/api-evangelist/dcc-smart/refs/heads/main/sandbox/dcc-smart-sandbox.yml)
+- [Data model](https://raw.githubusercontent.com/api-evangelist/dcc-smart/refs/heads/main/data-model/dcc-smart-data-model.yml)
+- [Conformance](https://raw.githubusercontent.com/api-evangelist/dcc-smart/refs/heads/main/conformance/dcc-smart-conformance.yml)
+- [Domain security probe](https://raw.githubusercontent.com/api-evangelist/dcc-smart/refs/heads/main/security/dcc-smart-domain-security.yml)
+- [Vulnerability disclosure](https://raw.githubusercontent.com/api-evangelist/dcc-smart/refs/heads/main/security/dcc-smart-vulnerability-disclosure.yml)
+- [Well-known probe](https://raw.githubusercontent.com/api-evangelist/dcc-smart/refs/heads/main/well-known/dcc-smart-well-known.yml)
+- [Agentic access contracts](https://raw.githubusercontent.com/api-evangelist/dcc-smart/refs/heads/main/agentic-access/dcc-smart-agentic-access.yml)
+- [Agent skills index](https://raw.githubusercontent.com/api-evangelist/dcc-smart/refs/heads/main/skills/_index.yml)
+- [Candidate MCP tool set (derived, not published by Smart DCC)](https://raw.githubusercontent.com/api-evangelist/dcc-smart/refs/heads/main/mcp/dcc-smart-mcp.yml)
+
+## Open source
+
+- [SmartDCCInnovation on GitHub](https://github.com/SmartDCCInnovation): 7 public repositories, all GPL-3.0
+- [@smartdcc/duis-parser](https://www.npmjs.com/package/@smartdcc/duis-parser): bi-directional DUIS XML to JSON conversion
+- [@smartdcc/duis-templates](https://www.npmjs.com/package/@smartdcc/duis-templates): catalog of DUIS request templates from RTDS
+- [@smartdcc/duis-sign-wrap](https://www.npmjs.com/package/@smartdcc/duis-sign-wrap): TypeScript wrapper around the Java signing tool
+- [@smartdcc/gbcs-parser](https://www.npmjs.com/package/@smartdcc/gbcs-parser): GBCS payload parser
+- [@smartdcc/dccboxed-keystore](https://www.npmjs.com/package/@smartdcc/dccboxed-keystore): DCC Boxed certificate and key store
+- [@smartdcc/dccboxed-nodered-nodes](https://www.npmjs.com/package/@smartdcc/dccboxed-nodered-nodes): Node-RED palette for DCC Boxed
+
+## Docs
+
+- [Document Centre](https://www.smartdcc.co.uk/document-centre/)
+- [DCC Boxed](https://www.smartdcc.co.uk/our-smart-network/network-products-services/dcc-boxed/)
+- [Testing Services](https://www.smartdcc.co.uk/our-smart-network/network-products-services/testing-services/)
+- [Partner with the DCC](https://www.smartdcc.co.uk/partner-with-the-dcc/)
+- [Consultations](https://www.smartdcc.co.uk/consultations/)
+- [The Smart Energy Code](https://smartenergycodecompany.co.uk/the-smart-energy-code/)
+
+## Operations and governance
+
+- [Network performance dashboard](https://www.smartdcc.co.uk/our-smart-network/network-data-dashboard/performance/)
+- [Major incident management](https://www.smartdcc.co.uk/major-incident-management/)
+- [Network updates and programme roadmap](https://www.smartdcc.co.uk/our-smart-network/network-updates/)
+- [Governance, reports and policies](https://www.smartdcc.co.uk/about-dcc/governance-regulations/governance-reports-policies/)
+- [Information Security Policy (PDF)](https://www.smartdcc.co.uk/media/sn5dn4hr/information-security-policy-3.pdf)
+- [Privacy Notice](https://www.smartdcc.co.uk/privacy-notice/)
+- [News and events](https://www.smartdcc.co.uk/news-events/)

@@ -1,0 +1,68 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for the DCC Boxed DUIS Signing Tool API
+  version: 1.0.0
+extends: openapi/dcc-boxed-duis-signing-tool-openapi.yml
+x-apievangelist:
+  generated: '2026-07-27'
+  method: generated
+  source: openapi/dcc-boxed-duis-signing-tool-openapi.yml
+  note: >-
+    Captures API Evangelist enrichment only. The upstream document at
+    https://raw.githubusercontent.com/SmartDCCInnovation/dccboxed-signing-tool/main/openapi.yaml
+    is harvested verbatim and is never mutated.
+actions:
+- target: $.info
+  update:
+    x-apievangelist-provider: dcc-smart
+    x-apievangelist-artifacts:
+      authentication: authentication/dcc-smart-authentication.yml
+      conventions: conventions/dcc-smart-conventions.yml
+      errors: errors/dcc-smart-problem-types.yml
+      lifecycle: lifecycle/dcc-smart-lifecycle.yml
+      sandbox: sandbox/dcc-smart-sandbox.yml
+      cli: cli/dcc-smart-cli.yml
+      packages: packages/dcc-smart-packages.yml
+      conformance: conformance/dcc-smart-conformance.yml
+      data_model: data-model/dcc-smart-data-model.yml
+      agentic_access: agentic-access/dcc-smart-agentic-access.yml
+      skills: skills/_index.yml
+    x-apievangelist-note: >-
+      This is the only machine-readable API contract Smart DCC publishes anywhere. It
+      describes a locally self-hosted developer utility, not a hosted Smart DCC service.
+      The production Smart DCC interface is DUIS, an XML web service over a private DCC User
+      Gateway Connection, available only to Smart Energy Code parties.
+- target: $.servers
+  update:
+  - url: http://localhost:8080
+    description: >-
+      Local development server — the default when the tool is started with the Server entry
+      point. Change the port with -p. Smart DCC operates no hosted instance of this API.
+- target: $.paths['/sign'].post
+  update:
+    tags: [signing]
+    x-agentic-access:
+      action-class: acting
+      consequence: write
+      subject: required
+      token: {max-ttl: 900}
+      audit: required
+    x-idempotency: >-
+      Not idempotent by default — the originator counter is overwritten with
+      System.currentTimeMillis() on every call, so identical input yields a different signed
+      document. Send preserveCounter true to keep the caller's counter.
+- target: $.paths['/verify'].post
+  update:
+    tags: [signing]
+    x-agentic-access:
+      action-class: acting
+      consequence: write
+      subject: required
+      token: {max-ttl: 900}
+      audit: required
+- target: $.components.schemas.Error
+  update:
+    x-error-format: custom-json
+    x-error-note: >-
+      Not RFC 9457 problem details. Returned as application/json with `error` (message) and
+      `errorCode` (Java exception class name).

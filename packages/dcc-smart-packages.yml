@@ -1,0 +1,98 @@
+generated: '2026-07-27'
+method: searched
+source: https://www.npmjs.com/org/smartdcc + https://github.com/SmartDCCInnovation
+summary: >-
+  Smart DCC Limited publishes six first-party open-source client libraries to npm under
+  the @smartdcc scope, all developed in the SmartDCCInnovation GitHub organisation and
+  all licensed GPL-3.0. They are tooling for the DCC Boxed test environment and the DUIS
+  (DCC User Interface Specification) XML message format rather than SDKs for a hosted
+  Smart DCC API — Smart DCC operates no self-serve hosted API. The Java DCC Boxed DUIS
+  signing and validation tool is NOT published to a package registry; it is built from
+  source with Maven (searched Maven Central for group uk.co.smartdcc and for the term
+  smartdcc on 2026-07-27 — 0 results).
+packages:
+- language: javascript
+  registry: npm
+  name: '@smartdcc/duis-parser'
+  version: 0.7.1
+  url: https://www.npmjs.com/package/@smartdcc/duis-parser
+  repository: https://github.com/SmartDCCInnovation/duis-parser
+  install: npm install @smartdcc/duis-parser
+  license: GPL-3.0
+  official: true
+  description: Lightweight bi-directional conversion between DUIS XML and JSON, wrapping
+    fast-xml-parser and tuned for DUIS.
+- language: javascript
+  registry: npm
+  name: '@smartdcc/duis-templates'
+  version: 0.7.0
+  url: https://www.npmjs.com/package/@smartdcc/duis-templates
+  repository: https://github.com/SmartDCCInnovation/duis-templates
+  install: npm install @smartdcc/duis-templates
+  license: GPL-3.0
+  official: true
+  description: Collection of DUIS templates in JSON format taken from RTDS, with utility
+    functions for searching the catalog by keyword or service request.
+- language: javascript
+  registry: npm
+  name: '@smartdcc/duis-sign-wrap'
+  version: 0.4.3
+  url: https://www.npmjs.com/package/@smartdcc/duis-sign-wrap
+  repository: https://github.com/SmartDCCInnovation/duis-sign-wrap
+  install: npm install @smartdcc/duis-sign-wrap
+  license: GPL-3.0
+  official: true
+  description: TypeScript wrapper around the Java DCC Boxed DUIS signing tool for signing
+    and validating DUIS messages from Node.
+- language: javascript
+  registry: npm
+  name: '@smartdcc/gbcs-parser'
+  version: 0.5.0
+  url: https://www.npmjs.com/package/@smartdcc/gbcs-parser
+  repository: https://github.com/SmartDCCInnovation/gbcs-parser
+  install: npm install @smartdcc/gbcs-parser
+  license: GPL-3.0
+  official: true
+  description: Parser for GBCS (Great Britain Companion Specification) payloads, based on
+    henrygiraldo.github.io.
+- language: javascript
+  registry: npm
+  name: '@smartdcc/dccboxed-keystore'
+  version: 0.4.2
+  url: https://www.npmjs.com/package/@smartdcc/dccboxed-keystore
+  repository: https://github.com/SmartDCCInnovation/dccboxed-keystore
+  install: npm install @smartdcc/dccboxed-keystore
+  license: GPL-3.0
+  official: true
+  description: Certificate and key store for DCC Boxed, exposed as a JSON database and a
+    TypeScript library that can query the DCC Boxed SMKI service for device certificates.
+- language: javascript
+  registry: npm
+  name: '@smartdcc/dccboxed-nodered-nodes'
+  version: 0.8.0
+  url: https://www.npmjs.com/package/@smartdcc/dccboxed-nodered-nodes
+  repository: https://github.com/SmartDCCInnovation/dccboxed-nodered-nodes
+  install: npm install @smartdcc/dccboxed-nodered-nodes
+  license: GPL-3.0
+  official: true
+  description: Node-RED node palette for sending DUIS requests to, and receiving
+    asynchronous DUIS responses and alerts from, a DCC Boxed instance.
+registries_probed:
+- registry: npm
+  query: smartdcc
+  result: 6 first-party packages under the @smartdcc scope
+- registry: Maven Central
+  query: g:uk.co.smartdcc / smartdcc
+  result: 0 results — the Java signing tool is built from source, not published
+- registry: PyPI
+  result: none found
+- registry: NuGet
+  result: none found
+- registry: pkg.go.dev
+  result: none found
+- registry: RubyGems
+  result: none found
+- registry: Packagist
+  result: none found
+- registry: crates.io
+  result: none found

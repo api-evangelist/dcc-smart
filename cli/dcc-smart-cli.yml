@@ -1,0 +1,94 @@
+generated: '2026-07-27'
+method: searched
+source: https://github.com/SmartDCCInnovation/dccboxed-signing-tool
+name: DCC Boxed DUIS Validation and Signing Tool
+summary: >-
+  A first-party Java command line tool from Smart DCC Limited that signs DUIS requests and
+  validates DUIS responses. It is the same binary that backs the published OpenAPI: run it
+  with the Server entry point and it becomes the HTTP API; run it with the Sign or Validate
+  entry point and it is a filter that reads XML on a file or stdin and writes to stdout.
+  There is no installer and no package-registry release — it is built from source with
+  Maven and invoked through java -cp.
+license: GPL-3.0
+language: java
+runtime: Java (tested against Java 11)
+install:
+- method: source
+  steps:
+  - git clone https://github.com/SmartDCCInnovation/dccboxed-signing-tool
+  - mvn package
+  produces: ./target/xmldsig-<version>.jar
+- method: registry
+  available: false
+  note: not published to Maven Central (searched g:uk.co.smartdcc — 0 results)
+modes:
+- name: Sign
+  entry_point: uk.co.smartdcc.boxed.xmldsig.Sign
+  invocation: java -cp ./target/xmldsig-<version>.jar uk.co.smartdcc.boxed.xmldsig.Sign message.xml
+  stdin: 'java -cp ./target/xmldsig-<version>.jar uk.co.smartdcc.boxed.xmldsig.Sign -'
+  description: >-
+    Reads an unsigned DUIS XML message from a file or stdin, adds an XML digital signature,
+    prints the signed XML to stdout and logging to stderr.
+  arguments:
+  - name: message.xml | -
+    description: input DUIS XML file, or - to read from stdin
+  - name: user.pem
+    optional: true
+    description: SMKI signer certificate in PEM; by default the tool selects the key from
+      the message originator
+  - name: user.key
+    optional: true
+    description: matching private key, EC prime256v1 in PKCS#8 PEM
+  options:
+  - flag: --preserveCounter
+    description: keep the originator counter supplied in the request instead of overwriting
+      it with System.currentTimeMillis()
+- name: Validate
+  entry_point: uk.co.smartdcc.boxed.xmldsig.Validate
+  invocation: java -cp ./target/xmldsig-<version>.jar uk.co.smartdcc.boxed.xmldsig.Validate message.xml
+  stdin: 'java -cp ./target/xmldsig-<version>.jar uk.co.smartdcc.boxed.xmldsig.Validate -'
+  description: >-
+    Validates the XML digital signature and the DUIS XSD on a signed message and prints the
+    message without the signature to stdout.
+  arguments:
+  - name: message.xml | -
+    description: input signed DUIS XML file, or - to read from stdin
+  - name: user.pem
+    optional: true
+    description: sender certificate in PEM; by default resolved from the message
+- name: Server
+  entry_point: uk.co.smartdcc.boxed.xmldsig.Server
+  invocation: java -cp ./target/xmldsig-<version>.jar uk.co.smartdcc.boxed.xmldsig.Server
+  description: Runs the tool as an HTTP server exposing POST /sign and POST /verify.
+  default_port: 8080
+  options:
+  - flag: -p <port>
+    description: server port (default 8080)
+  - flag: -q
+    description: quiet mode, disable logging
+  - flag: -h
+    description: show help
+  spec: openapi/dcc-boxed-duis-signing-tool-openapi.yml
+exit_codes:
+- {code: 0, meaning: Successful}
+- {code: 1, meaning: Generic java or OS error}
+- {code: 2, meaning: An exception raised in the app}
+- {code: 3, meaning: Missing public or private key material}
+- {code: 10, meaning: XSD validation failed (Sign) / XSD validation or signature check failed (Validate)}
+key_flows:
+- name: Sign and submit a DUIS command to a DCC Boxed instance
+  verbatim_from_docs: true
+  command: >-
+    java -cp xmldsig-<version>.jar uk.co.smartdcc.boxed.xmldsig.Sign
+    CS08_11.2_SUCCESS_REQUEST_DUIS.XML | curl http://dccboxed-server:8079/api/v1/serviceS
+    -H 'Content-Type: application/xml' --data-binary -
+  note: chains the CLI with cURL; the DCC Boxed service endpoint is on the local test appliance
+library_api:
+  note: >-
+    From v2.0.0 the same jar exposes a Java library API — Sign.verify_and_sign_input_stream
+    takes a preserveCounter flag, an InputStream, an OutputStream and a CertificateLibrary,
+    and returns the X509Certificate used to sign.
+related_tooling:
+- name: '@smartdcc/duis-sign-wrap'
+  description: TypeScript wrapper that shells out to this tool from Node
+  url: https://www.npmjs.com/package/@smartdcc/duis-sign-wrap

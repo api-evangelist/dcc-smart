@@ -1,0 +1,113 @@
+generated: '2026-07-27'
+method: derived
+source: openapi/dcc-boxed-duis-signing-tool-openapi.yml
+summary: >-
+  The published OpenAPI has almost no data model — one reusable schema (Error) and two
+  inline request/response objects, each carrying a single Base64 string. The real entities
+  live inside the Base64 payload, in DUIS XML and its GBCS payloads, which the spec treats
+  as an opaque blob. The entities below that are marked opaque_to_spec are documented in
+  first-party sources (the signing tool README, the Node-RED nodes README, the keystore
+  README and JSON Schema) rather than derived from the OpenAPI.
+entities:
+- name: SignRequest
+  source: openapi inline (POST /sign requestBody)
+  fields:
+  - {name: message, type: string, format: byte, required: true, description: Base64-encoded
+      unsigned DUIS XML message}
+  - {name: preserveCounter, type: boolean, required: false, default: false, description:
+      preserve the original originator counter instead of overwriting it}
+- name: SignResponse
+  source: openapi inline (POST /sign 200)
+  fields:
+  - {name: message, type: string, format: byte, description: Base64-encoded signed DUIS XML}
+- name: VerifyRequest
+  source: openapi inline (POST /verify requestBody)
+  fields:
+  - {name: message, type: string, format: byte, required: true, description: Base64-encoded
+      signed DUIS XML message}
+- name: VerifyResponse
+  source: openapi inline (POST /verify 200)
+  fields:
+  - {name: message, type: string, format: byte, description: Base64-encoded validated DUIS
+      XML with the signature removed}
+- name: Error
+  source: openapi components.schemas.Error
+  reused_by: [signMessage 400, signMessage 405, verifyMessage 400, verifyMessage 405]
+  fields:
+  - {name: error, type: string, description: Error message}
+  - {name: errorCode, type: string, description: Exception class name}
+- name: DuisMessage
+  opaque_to_spec: true
+  source: https://smartenergycodecompany.co.uk/documents/sec-subsidiary-documents/sec-appendix-ad-dcc-user-interface-specification-duis/
+  description: >-
+    The DUIS request or response document. Carries a header identifying the Originator
+    (sending Remote Party EUI), the Target (device or ACB EUI), the service request
+    variant and a request id containing a strictly incrementing originator counter, plus an
+    optional XML digital signature.
+  key_fields: [Originator, Target, ServiceRequest, RequestId, Counter, Signature]
+- name: GbcsPayload
+  opaque_to_spec: true
+  source: https://github.com/SmartDCCInnovation/gbcs-parser
+  description: Great Britain Companion Specification payload nested inside a DUIS response;
+    may be encrypted when it carries sensitive device data.
+- name: Certificate
+  opaque_to_spec: true
+  source: json-schema/dcc-smart-dccboxed-keystore-schema.json
+  description: >-
+    An SMKI certificate/private-key pair in the DCC Boxed keystore, keyed by 16-hex-character
+    EUI, then by key usage (keyAgreement or digitalSignature), then by certificate serial
+    number.
+  fields:
+  - {name: certificate, type: string, description: PEM encoded X.509 certificate}
+  - {name: privateKey, type: string, description: PEM encoded PKCS#8 key}
+  - {name: role, type: number, description: remote party role}
+relationships:
+- from: SignRequest
+  to: DuisMessage
+  type: has_one
+  via: message (Base64-encoded XML)
+- from: SignResponse
+  to: DuisMessage
+  type: has_one
+  via: message (Base64-encoded signed XML)
+- from: VerifyRequest
+  to: DuisMessage
+  type: has_one
+  via: message (Base64-encoded signed XML)
+- from: VerifyResponse
+  to: DuisMessage
+  type: has_one
+  via: message (Base64-encoded XML, signature stripped)
+- from: signMessage
+  to: Error
+  type: has_one
+  via: $ref components.schemas.Error on 400 and 405
+- from: verifyMessage
+  to: Error
+  type: has_one
+  via: $ref components.schemas.Error on 400 and 405
+- from: DuisMessage
+  to: Certificate
+  type: belongs_to
+  via: Originator EUI resolves the signing certificate/private key in the keystore
+- from: DuisMessage
+  to: Certificate
+  type: belongs_to
+  via: Target EUI resolves the device certificate fetched from the SMKI service
+- from: DuisMessage
+  to: GbcsPayload
+  type: has_one
+  via: nested GBCS payload on device responses
+identifiers:
+- name: EUI
+  format: 16 hexadecimal characters (lowercase in the keystore JSON keys)
+  used_for: [Originator, Target, keystore primary key]
+- name: certificate serial
+  format: decimal string key in the keystore JSON
+- name: originator counter
+  format: integer, strictly increasing; defaults to System.currentTimeMillis()
+schema_reuse:
+  components_schemas: 1
+  reused_by_operations: 2
+  inline_schemas: 4
+render: null

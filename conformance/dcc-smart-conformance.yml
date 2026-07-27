@@ -1,0 +1,114 @@
+generated: '2026-07-27'
+method: searched
+source: https://www.smartdcc.co.uk/media/sn5dn4hr/information-security-policy-3.pdf
+summary: >-
+  Smart DCC's conformance surface is regulatory and cryptographic, not web-API. The
+  published OpenAPI is a two-operation local utility with no security schemes, no OAuth,
+  no OIDC and no RFC 9457 problem details. What Smart DCC does conform to — and publishes
+  evidence for — is a UK energy-code and information-security regime: the Smart Meter
+  Communication Licence, the Smart Energy Code, the Retail Energy Code, ISO/IEC 27001:2022
+  certification, and the NIST Cybersecurity Framework 2.0. Message security is W3C XML
+  Signature over DUIS payloads using SMKI-issued EC prime256v1 certificates.
+standards:
+- id: iso-iec-27001-2022
+  conforms: true
+  evidence: >-
+    Information Security Policy v5.4 states the DCC Security Architecture Framework is
+    mapped and aligned to ISO/IEC 27001:2022 and that DCC is required to maintain
+    certification as defined in the Licence, operating an ISMS described in the DCC ISMS
+    Manual.
+  source: https://www.smartdcc.co.uk/media/sn5dn4hr/information-security-policy-3.pdf
+- id: nist-csf-2.0
+  conforms: true
+  evidence: >-
+    Information Security Policy v5.4 names the NIST Cybersecurity Framework (CSF) 2.0 as
+    the threat-led framework the DCC Security Architecture Framework is built on.
+  source: https://www.smartdcc.co.uk/media/sn5dn4hr/information-security-policy-3.pdf
+- id: smart-energy-code
+  conforms: true
+  evidence: >-
+    Smart DCC is a party to and is governed by the Smart Energy Code; DUIS is designated as
+    SEC Appendix AD and the DCC User Interface Code of Connection as SEC Appendix AE.
+  source: https://smartenergycodecompany.co.uk/the-smart-energy-code/
+- id: retail-energy-code
+  conforms: true
+  evidence: Information Security Policy scope names the Retail Energy Code alongside the
+    SEC and the Smart Meter Communication Licence.
+  source: https://www.smartdcc.co.uk/media/sn5dn4hr/information-security-policy-3.pdf
+- id: smart-meter-communication-licence
+  conforms: true
+  evidence: >-
+    Smart DCC Ltd holds the Smart Meter Communication Licence granted by Ofgem; licence and
+    regulation, price control and an Annual Compliance Report are published.
+  source: https://www.smartdcc.co.uk/about-dcc/governance-regulations/smart-dcc-licence-regulation/
+- id: uk-gdpr
+  conforms: true
+  evidence: Published Privacy Notice set, including a dedicated Switching Services privacy
+    notice and a detailed-information page.
+  source: https://www.smartdcc.co.uk/privacy-notice/
+- id: duis
+  conforms: true
+  evidence: >-
+    The DCC Boxed signing tool performs XSD validation against the DUIS schema and the
+    published OpenAPI signs and verifies DUIS XML; DUIS V5.3 and the DUIS XML Schema V5.1
+    are published.
+  source: https://www.smartdcc.co.uk/media/d5kh4khf/dcc-user-interface-specification-v53-18-mar-2025.pdf
+- id: gbcs
+  conforms: true
+  evidence: >-
+    First-party @smartdcc/gbcs-parser library parses Great Britain Companion Specification
+    payloads; the DCC Boxed Node-RED nodes decode and decrypt GBCS payloads in DUIS
+    responses.
+  source: https://github.com/SmartDCCInnovation/gbcs-parser
+- id: w3c-xmldsig
+  conforms: true
+  evidence: >-
+    The signing tool adds and validates an XML digital signature on DUIS messages
+    (uk.co.smartdcc.boxed.xmldsig).
+  source: https://github.com/SmartDCCInnovation/dccboxed-signing-tool
+- id: x509-pkcs8-secp256r1
+  conforms: true
+  evidence: >-
+    SMKI key material must be PEM-encoded X.509 certificates with EC prime256v1 private
+    keys in PKCS#8 format, per the signing tool documentation.
+  source: https://github.com/SmartDCCInnovation/dccboxed-signing-tool
+- id: json-schema-2020-12
+  conforms: true
+  evidence: >-
+    The DCC Boxed keystore database is described by a published JSON Schema declaring
+    $schema https://json-schema.org/draft/2020-12/schema.
+  source: json-schema/dcc-smart-dccboxed-keystore-schema.json
+- id: oauth2
+  conforms: false
+  evidence: No oauth2 securityScheme in any published spec and no OAuth documentation.
+- id: openid-connect
+  conforms: false
+  evidence: /.well-known/openid-configuration returns 404.
+- id: rfc9457-problem-details
+  conforms: false
+  evidence: >-
+    Errors are returned as application/json with custom `error` and `errorCode` fields, not
+    application/problem+json.
+- id: rfc9116-security-txt
+  conforms: false
+  evidence: /.well-known/security.txt returns 404 on both www.smartdcc.co.uk and smartdcc.co.uk.
+- id: rfc8594-sunset-header
+  conforms: false
+  evidence: No Deprecation or Sunset header contract; interface retirement runs through the
+    Smart Energy Code modification process.
+- id: fhir-r4
+  conforms: false
+- id: scim2
+  conforms: false
+- id: odata
+  conforms: false
+- id: json-api
+  conforms: false
+- id: green-button-espi
+  conforms: false
+  evidence: >-
+    No Green Button / ESPI surface; Britain has no consumer energy data right equivalent to
+    Green Button or the Australian Consumer Data Right. See review.yml.
+- id: cdr-consumer-data-standards
+  conforms: false
+  evidence: Australia-only regime; not applicable to a UK licensee.

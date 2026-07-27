@@ -1,0 +1,75 @@
+generated: '2026-07-27'
+method: derived
+source: openapi/dcc-boxed-duis-signing-tool-openapi.yml
+format: custom-json
+format_note: >-
+  Not RFC 9457. The signing tool returns a plain JSON object with two string fields —
+  `error` (the exception message) and `errorCode` (the Java exception class name) — with
+  media type application/json, not application/problem+json. There is no type URI, no
+  title, and no instance.
+envelope:
+  media_type: application/json
+  schema: '#/components/schemas/Error'
+  fields:
+  - name: error
+    type: string
+    description: Error message
+  - name: errorCode
+    type: string
+    description: Exception class name (Java class of the raised exception)
+problems:
+- status: 400
+  title: Bad request — invalid XML or signing error
+  source_operation: openapi/dcc-boxed-duis-signing-tool-openapi.yml#signMessage
+  schema: Error
+  causes:
+  - Body is not valid Base64
+  - Decoded payload is not well-formed XML
+  - Payload fails DUIS XSD validation
+  - No private key in the certificate library matches the message originator
+- status: 405
+  title: Method not allowed
+  source_operation: openapi/dcc-boxed-duis-signing-tool-openapi.yml#signMessage
+  schema: Error
+  causes:
+  - Any HTTP method other than POST on /sign
+- status: 400
+  title: Bad request — invalid signature or validation error
+  source_operation: openapi/dcc-boxed-duis-signing-tool-openapi.yml#verifyMessage
+  schema: Error
+  causes:
+  - Body is not valid Base64
+  - Decoded payload is not well-formed XML
+  - Payload carries no XML digital signature
+  - Digital signature does not verify against the sender certificate
+  - Payload fails DUIS XSD validation
+- status: 405
+  title: Method not allowed
+  source_operation: openapi/dcc-boxed-duis-signing-tool-openapi.yml#verifyMessage
+  schema: Error
+  causes:
+  - Any HTTP method other than POST on /verify
+exit_codes:
+  note: >-
+    The same tool run as a CLI signals failure with POSIX exit codes rather than the JSON
+    envelope. Captured verbatim from the project README.
+  source: https://github.com/SmartDCCInnovation/dccboxed-signing-tool
+  codes:
+  - code: 0
+    meaning: Successful
+  - code: 1
+    meaning: Generic java or OS error
+  - code: 2
+    meaning: An exception raised in the app
+  - code: 3
+    meaning: Missing public or private key material
+  - code: 10
+    meaning: XSD validation failed (Sign) / XSD validation or signature check failed (Validate)
+duis_response_codes:
+  note: >-
+    DUIS itself carries its own application-level response codes on the production
+    interface (for example the I99 acknowledgement and I0 responses referenced in the
+    DCC Boxed Node-RED documentation). The authoritative registry is the DCC User
+    Interface Specification, published as SEC Appendix AD; it is a PDF, not a
+    machine-readable error catalog, and is not reproduced here.
+  source: https://smartenergycodecompany.co.uk/documents/sec-subsidiary-documents/sec-appendix-ad-dcc-user-interface-specification-duis/

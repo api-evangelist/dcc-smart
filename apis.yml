@@ -64,7 +64,23 @@ apis:
     url: https://github.com/SmartDCCInnovation/dccboxed-signing-tool
   - type: Specification
     url: https://smartenergycodecompany.co.uk/documents/sec-subsidiary-documents/sec-appendix-ad-dcc-user-interface-specification-duis/
+  - type: Overlay
+    url: overlays/dcc-smart-dcc-boxed-duis-signing-tool-overlay.yaml
+  - type: Authentication
+    url: authentication/dcc-smart-authentication.yml
+  - type: Conventions
+    url: conventions/dcc-smart-conventions.yml
+  - type: ErrorCatalog
+    url: errors/dcc-smart-problem-types.yml
+  - type: DataModel
+    url: data-model/dcc-smart-data-model.yml
+  - type: AgentSkill
+    url: skills/_index.yml
 common:
+- type: AgenticAccess
+  url: agentic-access/dcc-smart-agentic-access.yml
+- type: DomainSecurity
+  url: security/dcc-smart-domain-security.yml
 - type: Website
   url: https://www.smartdcc.co.uk/
 - type: About
@@ -93,6 +109,48 @@ common:
   url: https://www.smartdcc.co.uk/our-smart-network/network-products-services/dcc-boxed/
 - type: Regulation
   url: https://smartenergycodecompany.co.uk/the-smart-energy-code/
+- type: Packages
+  url: packages/dcc-smart-packages.yml
+- type: SDKs
+  url: packages/dcc-smart-packages.yml
+- type: CLI
+  url: cli/dcc-smart-cli.yml
+- type: Components
+  url: components/dcc-smart-components.yml
+- type: Sandbox
+  url: sandbox/dcc-smart-sandbox.yml
+- type: Conformance
+  url: conformance/dcc-smart-conformance.yml
+- type: Compliance
+  url: https://www.smartdcc.co.uk/about-dcc/governance-regulations/governance-reports-policies/
+- type: Lifecycle
+  url: lifecycle/dcc-smart-lifecycle.yml
+- type: StatusPage
+  url: https://www.smartdcc.co.uk/our-smart-network/network-data-dashboard/performance/
+- type: ChangeLog
+  url: changelog/dcc-smart-changelog.yml
+- type: ChangeLog
+  url: https://github.com/SmartDCCInnovation/dccboxed-signing-tool/releases
+- type: Roadmap
+  url: https://www.smartdcc.co.uk/our-smart-network/network-updates/
+- type: VulnerabilityDisclosure
+  url: security/dcc-smart-vulnerability-disclosure.yml
+- type: Security
+  url: https://www.smartdcc.co.uk/media/sn5dn4hr/information-security-policy-3.pdf
+- type: WellKnown
+  url: well-known/dcc-smart-well-known.yml
+- type: LLMsTxt
+  url: llms/dcc-smart-llms.txt
+- type: Vocabulary
+  url: vocabulary/dcc-smart-vocabulary.yml
+- type: JSONSchema
+  url: json-schema/dcc-smart-dccboxed-keystore-schema.json
+- type: Support
+  url: https://www.smartdcc.co.uk/contact-us-service-users/
+- type: PrivacyPolicy
+  url: https://www.smartdcc.co.uk/privacy-notice/
+- type: Pricing
+  url: https://www.smartdcc.co.uk/about-dcc/governance-regulations/charges/
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com

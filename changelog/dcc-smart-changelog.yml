@@ -1,0 +1,73 @@
+generated: '2026-07-27'
+method: searched
+source: https://github.com/SmartDCCInnovation/dccboxed-signing-tool/releases
+summary: >-
+  Smart DCC keeps no product changelog on smartdcc.co.uk. The only dated, versioned change
+  record for anything with a machine-readable contract is the GitHub release feed of the
+  DCC Boxed DUIS signing tool, where each release since v2.0.0 carries a generated changelog
+  in the release body. Network-level change is communicated instead through the Network
+  Updates page and the SEC consultation record.
+scheme: semver
+current_version: 2.1.2
+current_released: '2026-02-09'
+url: https://github.com/SmartDCCInnovation/dccboxed-signing-tool/releases
+entries:
+- version: v2.1.2
+  date: '2026-02-09'
+  breaking: false
+  highlights:
+  - improve logging statements for http server
+  - fix http server verify with no xml signature
+- version: v2.1.1
+  date: '2026-02-08'
+  breaking: false
+  highlights:
+  - fix http server preserve counter
+- version: v2.1.0
+  date: '2026-02-06'
+  breaking: false
+  additions:
+  - HTTP server mode, exposing POST /sign and POST /verify — the surface described by the
+    published OpenAPI
+- version: v2.0.1
+  date: '2026-02-01'
+  breaking: false
+  highlights:
+  - fix correct return of Sign.verify_and_sign_input_stream
+- version: v2.0.0
+  date: '2026-01-19'
+  breaking: true
+  highlights:
+  - expose api for sign and validate (library API)
+  - gh action to include changelog in release
+  - gh action migrate to env file
+  - document release process
+- version: v1.2.0
+  date: '2026-01-02'
+  breaking: false
+  highlights: []
+- version: v1.1.1
+  date: '2025-10-30'
+  breaking: false
+  highlights: []
+- version: v1.1.0
+  date: '2025-07-14'
+  breaking: false
+  highlights: []
+- version: v1.0.7
+  date: '2025-03-14'
+  breaking: false
+  highlights: []
+other_change_surfaces:
+- name: Network Updates
+  url: https://www.smartdcc.co.uk/our-smart-network/network-updates/
+  detail: in-flight programmes and key initiatives with estimated delivery dates
+- name: Consultations
+  url: https://www.smartdcc.co.uk/consultations/
+  detail: >-
+    Every change to a designated interface document (DUIS, SMETS1 Supporting Requirements,
+    Testing Approach Documents, Communications Hub Supporting Information) is consulted on
+    publicly and the DCC's conclusions published, giving a dated public record of interface
+    change.
+- name: Document Centre
+  url: https://www.smartdcc.co.uk/document-centre/

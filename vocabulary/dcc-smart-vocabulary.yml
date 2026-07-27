@@ -1,0 +1,193 @@
+generated: '2026-07-27'
+method: generated
+source: >-
+  https://www.smartdcc.co.uk/media/sn5dn4hr/information-security-policy-3.pdf (abbreviations
+  table) + https://github.com/SmartDCCInnovation READMEs + smartdcc.co.uk product and
+  governance pages
+note: >-
+  Every term below is expanded exactly as Smart DCC or the Smart Energy Code expands it in a
+  published source. Definitions are written from those sources; nothing here is invented.
+  This is the working vocabulary a developer needs to read DUIS, GBCS and the Smart Energy
+  Code documents.
+terms:
+- term: DCC
+  expansion: Data Communications Company
+  definition: Smart DCC Ltd, the Ofgem-licensed operator of Britain's national smart
+    metering communications network. A wholly owned subsidiary of Capita plc.
+  source: https://www.smartdcc.co.uk/about-dcc/
+- term: DUIS
+  expansion: DCC User Interface Specification
+  definition: The XML interface specification that defines how DCC Users send service
+    requests to, and receive responses and alerts from, the DCC. Designated as SEC Appendix
+    AD; V5.3 dated 18 March 2025.
+  source: https://smartenergycodecompany.co.uk/documents/sec-subsidiary-documents/sec-appendix-ad-dcc-user-interface-specification-duis/
+- term: DUIS Code of Connection
+  expansion: DCC User Interface Code of Connection
+  definition: SEC Appendix AE — the conditions a DCC User must meet to connect to the DCC
+    User Interface.
+  source: https://smartenergycodecompany.co.uk/documents/sec-subsidiary-documents/sec-appendix-ae-dcc-user-interface-code-of-connection/
+- term: GBCS
+  expansion: Great Britain Companion Specification
+  definition: The specification governing the message format exchanged with smart metering
+    devices; carried as a payload inside DUIS responses and may be encrypted when it holds
+    sensitive data.
+  source: https://github.com/SmartDCCInnovation/gbcs-parser
+- term: SMETS1
+  expansion: Smart Metering Equipment Technical Specification version 1
+  definition: First-generation smart meters, enrolled and adopted onto the DCC network
+    through the SMETS1 Enrolment and Adoption programme.
+  source: https://www.smartdcc.co.uk/our-smart-network/current-programmes/smets1-enrolment-and-adoption/
+- term: SMETS2
+  expansion: Smart Metering Equipment Technical Specification version 2
+  definition: Second-generation smart meters, natively interoperable on the DCC network.
+  source: https://www.smartdcc.co.uk/news-events/20-million-second-generation-meters-now-connected-to-our-network/
+- term: SMKI
+  expansion: Smart Metering Key Infrastructure
+  definition: The public key infrastructure that issues the organisation and device
+    certificates used to sign and encrypt smart metering traffic. Key material is
+    PEM-encoded X.509 with EC prime256v1 private keys in PKCS#8 format.
+  source: https://github.com/SmartDCCInnovation/dccboxed-signing-tool
+- term: ZAZ1
+  expansion: null
+  definition: A self-contained test PKI for UK smart meter devices, used by DCC Boxed and
+    any smart energy devices attached to it. Its certificates and private keys are published
+    openly for testing.
+  source: https://github.com/SmartDCCInnovation/dccboxed-keystore
+- term: SEC
+  expansion: Smart Energy Code
+  definition: The multiparty industry code governing end-to-end smart metering, under which
+    DUIS and its companion documents are designated.
+  source: https://smartenergycodecompany.co.uk/the-smart-energy-code/
+- term: REC
+  expansion: Retail Energy Code
+  definition: The industry code governing the operation of the retail energy market; named
+    alongside the SEC and the Licence in the scope of DCC's Information Security Policy.
+  source: https://www.smartdcc.co.uk/media/sn5dn4hr/information-security-policy-3.pdf
+- term: Licence
+  expansion: Smart Meter Communication Licence
+  definition: The Ofgem-granted licence under which Smart DCC operates the national smart
+    metering communications network.
+  source: https://www.smartdcc.co.uk/about-dcc/governance-regulations/smart-dcc-licence-regulation/
+- term: DCC Boxed
+  expansion: null
+  definition: An Intel NUC-based test appliance that emulates the end-to-end smart metering
+    network, aligned with the November 2023 SEC release with all device SRVs supported.
+  source: https://www.smartdcc.co.uk/our-smart-network/network-products-services/dcc-boxed/
+- term: GFI
+  expansion: null
+  definition: A Smart DCC test tool that predates DCC Boxed and ships the same ZAZ1 test
+    certificates and private keys.
+  source: https://www.smartdcc.co.uk/our-smart-network/network-products-services/gfi/
+- term: ITCH
+  expansion: Instrumented Test Communications Hub
+  definition: A test communications hub available as an ancillary component for DCC Boxed
+    (Wired ITCH).
+  source: https://www.smartdcc.co.uk/our-smart-network/network-products-services/dcc-boxed/
+- term: SRV
+  expansion: Service Request Variant
+  definition: The identifier of a DUIS service request, for example SRV 4.1.1 (read current
+    energy usage), SRV 1.1.1 (ESME tariff) and SRV 2.2 (Top Up Device).
+  source: https://github.com/SmartDCCInnovation/dccboxed-nodered-nodes
+- term: EUI
+  expansion: Extended Unique Identifier
+  definition: The 16-hexadecimal-character identifier used for the DUIS Originator (sending
+    Remote Party) and Target (end device or ACB), and as the primary key of the DCC Boxed
+    keystore.
+  source: https://github.com/SmartDCCInnovation/dccboxed-keystore
+- term: ACB
+  expansion: Access Control Broker
+  definition: A remote party addressable as a DUIS Target; its digital signature certificate
+    is one of the certificates commonly added to a DCC Boxed keystore.
+  source: https://github.com/SmartDCCInnovation/dccboxed-keystore
+- term: I99
+  expansion: null
+  definition: The DUIS synchronous acknowledgement returned for a device command, before the
+    asynchronous device response arrives.
+  source: https://github.com/SmartDCCInnovation/dccboxed-nodered-nodes
+- term: I0
+  expansion: null
+  definition: The later, asynchronous DUIS response carrying the actual result of a device
+    command.
+  source: https://github.com/SmartDCCInnovation/dccboxed-nodered-nodes
+- term: UTRN
+  expansion: Unique Transaction Reference Number
+  definition: A prepayment top-up token; it can be generated and submitted programmatically
+    with service request 2.2 (Top Up Device) or entered manually on a meter.
+  source: https://github.com/SmartDCCInnovation/dccboxed-nodered-nodes
+- term: RTDS
+  expansion: null
+  definition: The source of the DUIS request templates published in @smartdcc/duis-templates.
+  source: https://github.com/SmartDCCInnovation/duis-templates
+- term: HAN
+  expansion: Home Area Network
+  definition: The local device network in a premises; the DCC Boxed HAN page lists the EUIs
+    of attached devices.
+  source: https://github.com/SmartDCCInnovation/dccboxed-nodered-nodes
+- term: PPMID
+  expansion: Prepayment Meter Interface Device
+  definition: A HAN device that can be pair-wise joined with an ESME.
+  source: https://github.com/SmartDCCInnovation/dccboxed-nodered-nodes
+- term: ESME
+  expansion: Electricity Smart Metering Equipment
+  definition: The electricity smart meter; target of tariff commands such as SRV 1.1.1.
+  source: https://github.com/SmartDCCInnovation/dccboxed-nodered-nodes
+- term: ECoS
+  expansion: Enduring Change of Supplier
+  definition: A DCC programme delivering the enduring arrangements for change of energy
+    supplier.
+  source: https://www.smartdcc.co.uk/our-smart-network/current-programmes/enduring-change-of-supplier-ecos/
+- term: MHHS
+  expansion: Market-wide Half-Hourly Settlement
+  definition: The industry programme moving electricity settlement to half-hourly data
+    market-wide.
+  source: https://www.smartdcc.co.uk/our-smart-network/current-programmes/market-wide-half-hourly-settlement/
+- term: DSP
+  expansion: Data Service Provider
+  definition: The provider of DCC's central data services; the subject of the DSP programme.
+  source: https://www.smartdcc.co.uk/our-smart-network/current-programmes/data-service-provider-dsp-programme/
+- term: CSS
+  expansion: Central Switching Service
+  definition: The energy supplier switching service operated by DCC; Ofgem confirmed in 2024
+    that it stays with DCC.
+  source: https://www.smartdcc.co.uk/news-events/ofgem-confirms-successful-switching-service-to-stay-with-dcc/
+- term: DFS
+  expansion: Demand Flexibility Service
+  definition: A National Grid ESO programme the DCC network supports.
+  source: https://www.smartdcc.co.uk/enabling-innovation/what-is-the-demand-flexibility-service-dfs/
+- term: TAD
+  expansion: Testing Approach Document
+  definition: The document consulted on ahead of each June and November SEC release, setting
+    out how the release will be tested.
+  source: https://www.smartdcc.co.uk/consultations/
+- term: SVTAD
+  expansion: SEC Variation Testing Approach Document
+  definition: The testing approach document for a SEC variation.
+  source: https://www.smartdcc.co.uk/consultations/
+- term: S1SR
+  expansion: SMETS1 Supporting Requirements
+  definition: The designated SEC subsidiary document carrying SMETS1 supporting requirements,
+    amended through public consultation.
+  source: https://www.smartdcc.co.uk/consultations/
+- term: ISMS
+  expansion: Information Security Management System
+  definition: The management system defined within ISO/IEC 27001 and described in the DCC
+    ISMS Manual.
+  source: https://www.smartdcc.co.uk/media/sn5dn4hr/information-security-policy-3.pdf
+- term: CISO
+  expansion: Chief Information Security Officer
+  definition: The role accountable for the DCC Information Security Policy and for
+    maintaining compliance with it.
+  source: https://www.smartdcc.co.uk/media/sn5dn4hr/information-security-policy-3.pdf
+- term: NIST CSF
+  expansion: NIST Cybersecurity Framework
+  definition: The threat-led framework, at version 2.0, that the DCC Security Architecture
+    Framework is aligned to and mapped onto ISO/IEC 27001:2022.
+  source: https://www.smartdcc.co.uk/media/sn5dn4hr/information-security-policy-3.pdf
+- term: Category 1 incident
+  expansion: null
+  definition: >-
+    An incident which, in the reasonable opinion of the DCC, prevents a large group of DCC
+    Service Users from using the DCC Service User Systems, has a critical adverse impact on
+    the activities of the DCC, causes significant financial loss and/or disruption to the
+    DCC, or results in any material loss or corruption of DCC data. Published monthly.
+  source: https://www.smartdcc.co.uk/major-incident-management/

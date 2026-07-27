@@ -1,0 +1,47 @@
+generated: '2026-07-27'
+method: probed
+source: live probes of the Smart DCC web host on 2026-07-27
+summary: >-
+  Smart DCC publishes no /.well-known/ discovery documents. Every probed path on
+  www.smartdcc.co.uk and smartdcc.co.uk returned 404, including security.txt (RFC 9116).
+  There is no API host to probe — the only Smart DCC OpenAPI is for a locally self-hosted
+  tool (http://localhost:8080) and the production DUIS interface is reached over a private
+  DCC User Gateway Connection, not a public hostname. Absence is valid recorded data.
+hosts:
+- host: https://www.smartdcc.co.uk
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404
+  - path: /llms.txt
+    status: 404
+  - path: /robots.txt
+    status: 200
+  - path: /sitemap.xml
+    status: 200
+- host: https://smartdcc.co.uk
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+subdomains_probed:
+- host: https://api.smartdcc.co.uk
+  status: no DNS / no response
+- host: https://developer.smartdcc.co.uk
+  status: no DNS / no response
+- host: https://docs.smartdcc.co.uk
+  status: no DNS / no response
+- host: https://status.smartdcc.co.uk
+  status: no DNS / no response
+- host: https://trust.smartdcc.co.uk
+  status: no DNS / no response
+- host: https://security.smartdcc.co.uk
+  status: no DNS / no response
+files: []
+result: none

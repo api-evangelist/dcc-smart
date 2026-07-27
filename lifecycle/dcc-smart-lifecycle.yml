@@ -1,0 +1,72 @@
+generated: '2026-07-27'
+method: searched
+source: https://github.com/SmartDCCInnovation/dccboxed-signing-tool/releases
+summary: >-
+  Smart DCC runs two very different lifecycles. The open-source DCC Boxed tooling is
+  versioned with semantic-version git tags and dated GitHub releases. The production DUIS
+  interface is versioned by the Smart Energy Code modification process: a numbered DUIS
+  version (v5.3 at the time of review) designated through consultation and delivered in
+  scheduled June and November SEC releases, each with a published Testing Approach
+  Document consulted on in advance.
+versioning:
+- surface: DCC Boxed DUIS signing tool
+  scheme: semver
+  current: 2.1.2
+  released: '2026-02-09'
+  tags: https://github.com/SmartDCCInnovation/dccboxed-signing-tool/releases
+  in_spec: 1.0.0 (info.version in the published openapi.yaml, not kept in step with the
+    release tag)
+- surface: DUIS (DCC User Interface Specification)
+  scheme: numbered specification version designated under the Smart Energy Code
+  current: V5.3
+  released: '2025-03-18'
+  docs: https://www.smartdcc.co.uk/media/d5kh4khf/dcc-user-interface-specification-v53-18-mar-2025.pdf
+  registry: https://smartenergycodecompany.co.uk/documents/sec-subsidiary-documents/sec-appendix-ad-dcc-user-interface-specification-duis/
+release_process:
+  cadence: two scheduled SEC releases per year, in June and November
+  consultation: >-
+    Each SEC release is preceded by a public consultation on a Testing Approach Document,
+    with the DCC's conclusions published afterwards. Interface changes (DUIS, GBCS, SMETS1
+    Supporting Requirements) are consulted on individually before designation.
+  url: https://www.smartdcc.co.uk/consultations/
+deprecation:
+  policy_url: https://smartenergycodecompany.co.uk/the-smart-energy-code/
+  sunset_header: false
+  note: >-
+    There is no HTTP Deprecation/Sunset (RFC 8594) header contract — DUIS is an XML web
+    service on a private gateway and the signing tool is a two-operation local utility.
+    Withdrawal of an interface version is a Smart Energy Code modification: changes are
+    consulted on, designated with an effective date, and legacy behaviour is retired via
+    the code, not via response headers. Example in the public consultation record: the
+    proposal to remove the 0x8F75 alert from the Traffic Management Mechanism Document.
+  evidence:
+  - https://www.smartdcc.co.uk/consultations/consultation-on-a-proposal-to-remove-the-0x8f75-alert-from-the-traffic-management-mechanism-document/
+  - https://www.smartdcc.co.uk/consultations/smets1-conclusion-clause-retention-beyond-smets1-tmad-expiry-and-proposed-amendments-to-the-smets1-supporting-requirements/
+status_page: https://www.smartdcc.co.uk/our-smart-network/network-data-dashboard/performance/
+status_page_detail:
+  published_metrics:
+  - Percentage of service requests successfully carried on the network, with volume trend
+  - Percentage of successful pre-pay top-up requests over the last year
+  - Network availability — proportion of time the network operated as normal
+  - Network availability during planned changes
+  incident_reporting: https://www.smartdcc.co.uk/major-incident-management/
+  incident_detail: >-
+    Smart DCC publishes every Category 1 incident at the end of each month as a downloadable
+    PDF, with a public definition of what qualifies as Category 1, and states 24/7
+    monitoring. More detailed major incident reports are available to SEC Parties via the
+    SEC website. As of the June 2026 report there were no Category 1 incidents in the month.
+sla:
+  url: null
+  uptime_target: null
+  note: >-
+    No public uptime SLA. Service levels are set by the Smart Meter Communication Licence
+    and the Smart Energy Code and reported through the Annual Compliance Report and the
+    performance dashboard rather than as a published API SLA.
+  reporting: https://www.smartdcc.co.uk/about-dcc/governance-regulations/governance-reports-policies/
+roadmap: https://www.smartdcc.co.uk/our-smart-network/network-updates/
+roadmap_detail: >-
+  The Network Updates page lists in-flight programmes and key initiatives with estimated
+  delivery dates, including the Data Service Provider (DSP) programme, Enduring Change of
+  Supplier (ECoS), Market-wide Half-Hourly Settlement, dual-band communications hubs,
+  4G network evolution and SMETS1 enrolment and adoption.
+deprecated_operations: []

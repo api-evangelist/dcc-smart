@@ -1,0 +1,58 @@
+generated: '2026-07-27'
+method: searched
+source: https://github.com/SmartDCCInnovation/dccboxed-nodered-nodes
+summary: >-
+  Smart DCC ships no web UI component library, no embeddable elements and no hosted
+  dashboard for developers. What it does publish is a first-party low-code component set:
+  a Node-RED node palette that drops onto a flow canvas and hides the XML, signing,
+  critical-command and GBCS decryption work involved in talking to a DCC Boxed instance.
+  These are visual flow components, not browser UI components.
+families:
+- name: Node-RED palette (smartdcc category)
+  loader: '@smartdcc/dccboxed-nodered-nodes'
+  install: install the @smartdcc/dccboxed-nodered-nodes package into the Node-RED palette
+  url: https://github.com/SmartDCCInnovation/dccboxed-nodered-nodes
+  license: GPL-3.0
+  requirements:
+  - Node 24 or later
+  - Node-RED (developed and tested against 3.1.0)
+  - Java on PATH (tested against Java 11) for the sign/validate, send and receive nodes
+  components:
+  - name: duis-template
+    description: >-
+      Provides template DUIS requests from the @smartdcc/duis-templates catalog, searchable
+      by keyword or service request, with configurable Originator and Target (resolvable
+      from the input message, flow or global variables) and an editable JSON payload
+      supporting mustache-style variable interpolation.
+  - name: duis-tariff
+    description: >-
+      Alternative to duis-template for building ESME single-element SRV 1.1.1 commands from
+      a simplified JSON tariff; ships three example tariffs.
+  - name: dccboxed-config
+    description: >-
+      Shared configuration node holding the DCC Boxed host and port, the Receive Response
+      Service address, and advanced TLS and extra-header options for running DCC Boxed
+      behind an authenticating reverse proxy.
+  - name: dccboxed-send
+    description: >-
+      Fully managed send: converts DUIS JSON to XML, adds the XML digital signature,
+      transparently handles critical-request processing by calling the transform service and
+      signing the resulting pre-command, returns synchronous responses, and stores the
+      original request when the response is an I99 acknowledgement.
+  - name: dccboxed-receive
+    description: >-
+      Fully managed asynchronous receive: validates the incoming DUIS response against the
+      XSD and its digital signature, converts XML to JSON, decodes and decrypts any GBCS
+      payload, and reconciles the response back to the stored request. Multiple receive
+      nodes can be filtered by service request or to device alerts only.
+  - name: duis - sign & validate
+    description: Standalone signing and validation node wrapping the Java signing tool.
+  capabilities:
+  - A library of DUIS templates (from RTDS)
+  - Send DUIS requests to DCC Boxed (critical, non-critical, device and non-device)
+  - Receive DUIS responses both synchronously and asynchronously
+  - Generate and submit UTRN tokens
+not_published:
+- browser/web components or custom elements
+- embeddable checkout/portal/dashboard surfaces
+- hosted developer console

@@ -1,0 +1,93 @@
+generated: '2026-07-27'
+method: searched
+source: https://github.com/SmartDCCInnovation/dccboxed-signing-tool
+summary: >-
+  Two sets of conventions apply. The published OpenAPI is a deliberately minimal
+  JSON-in/JSON-out utility: POST-only, a single `message` field carrying Base64-encoded
+  XML, no auth, no pagination, no versioning in the path, no rate limiting. Underneath it
+  sits DUIS, a code-governed XML request/response protocol with its own header, identity,
+  counter and asynchronous-response semantics — the conventions that actually matter to
+  anyone integrating with the Smart DCC network.
+authentication:
+  style: none on the published HTTP surface
+  detail: see authentication/dcc-smart-authentication.yml
+  production: XML digital signature with SMKI organisation certificates over a private DCC
+    User Gateway Connection
+content_types:
+  request: application/json
+  response: application/json
+  payload_encoding: >-
+    The DUIS XML document itself is carried Base64-encoded in a JSON string field named
+    `message` (OpenAPI `type: string, format: byte`), in both directions.
+  cli_native: The same tool used as a CLI reads and writes raw XML on stdin/stdout.
+http:
+  methods: [POST]
+  method_not_allowed: any non-POST method on /sign or /verify returns 405 with the Error
+    envelope
+  paths: [/sign, /verify]
+  path_versioning: none — the paths carry no version segment
+idempotency:
+  supported: false
+  header: null
+  note: >-
+    There is no idempotency-key contract. DUIS instead carries an anti-replay control: a
+    strictly incrementing originator counter inside the DUIS request id. By default the
+    signing tool OVERWRITES whatever counter is supplied with System.currentTimeMillis(),
+    matching how DCC Boxed generates counters internally, which makes repeated calls to
+    /sign with the same input produce different signed documents. Passing preserveCounter
+    (--preserveCounter on the CLI, `preserveCounter: true` in the JSON body) keeps the
+    caller's counter, which is the closest thing to a deterministic replay of a request.
+    This is replay protection and message uniqueness, not idempotent request handling.
+pagination:
+  supported: false
+  note: No collection endpoints exist on the published surface.
+filtering_expansion:
+  supported: false
+metadata:
+  supported: false
+request_tracing:
+  header: null
+  note: >-
+    No request-id header. Correlation on the production interface is done at the DUIS
+    layer: the Originator/Target pair and the request id (including the counter) identify a
+    command, and asynchronous responses are reconciled back to the originating request by
+    the client. The DCC Boxed Node-RED nodes implement exactly this reconciliation — a
+    synchronous I99 acknowledgement is stored against the original request and later
+    matched to the asynchronous I0 response or alert.
+asynchrony:
+  model: synchronous acknowledgement plus asynchronous callback
+  detail: >-
+    A DUIS request to DCC Boxed returns a synchronous response, which for device commands
+    is typically an I99 acknowledgement. The real device response, and any device or
+    network alert, is delivered later to a Receive Response Service address that the caller
+    configures on the DCC Boxed DUIS Interface (default path /smartdcc/duis in the Node-RED
+    integration). Callers must therefore run a listener, validate the XSD and digital
+    signature of what arrives, decode any GBCS payload, and reconcile it with the request.
+  source: https://github.com/SmartDCCInnovation/dccboxed-nodered-nodes
+  artifact: null
+  note: No AsyncAPI document is published for this callback surface.
+critical_commands:
+  note: >-
+    DUIS distinguishes critical from non-critical commands. A critical command must be sent
+    to the transform service first, and the resulting pre-command signed, before it can be
+    submitted. Sensitive (encrypted) device data requires a further decryption step on the
+    response. The Node-RED nodes and duis-sign-wrap hide this two-phase flow.
+error_envelope:
+  format: custom-json
+  fields: [error, errorCode]
+  detail: see errors/dcc-smart-problem-types.yml
+rate_limiting:
+  signalled: false
+  note: >-
+    No rate-limit headers on the local tool. The production network applies a Traffic
+    Management Mechanism defined in a SEC subsidiary document rather than HTTP rate-limit
+    headers.
+versioning:
+  tool: semantic version tags on GitHub releases; see lifecycle/dcc-smart-lifecycle.yml
+  interface: numbered DUIS version designated through the Smart Energy Code
+cross_links:
+  authentication: authentication/dcc-smart-authentication.yml
+  errors: errors/dcc-smart-problem-types.yml
+  lifecycle: lifecycle/dcc-smart-lifecycle.yml
+  sandbox: sandbox/dcc-smart-sandbox.yml
+  conformance: conformance/dcc-smart-conformance.yml
