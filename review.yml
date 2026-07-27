@@ -1,0 +1,271 @@
+aid: dcc-smart
+name: Smart DCC
+review:
+  question: Does Smart DCC publish a public, documented API — and does any energy data
+    mandate compel it to expose consumer or market data?
+  answer: partial
+  date: '2026-07-27'
+  reviewer: API Evangelist
+  summary: |
+    Smart DCC is the Ofgem-licensed monopoly operator of Britain's national smart
+    metering communications network. Its production interface — the DCC User
+    Interface Specification (DUIS), an XML web service reached over a DCC User
+    Gateway Connection — is real, documented, and openly specified, but is not
+    obtainable by a developer. Access requires acceding to the Smart Energy Code,
+    ordering a gateway connection, obtaining SMKI certificates, and passing SREPT
+    and UEPT testing. The only machine-readable API contract Smart DCC publishes
+    is a single OpenAPI 3.0.3 document for the open-source DCC Boxed DUIS signing
+    and validation tool, which runs locally and has no hosted endpoint.
+
+mandate:
+  regime: smart-meter-infrastructure
+  status: live-implemented
+  regime_verbatim: |
+    Smart DCC holds the Smart Meter Communication Licence granted by Ofgem under the
+    Electricity Act 1989 and Gas Act 1986, and operates under the Smart Energy Code
+    (SEC), a multiparty industry code. This is an INFRASTRUCTURE mandate: Britain
+    compelled the building and operation of a national smart-metering communications
+    network and compelled suppliers and network operators to use it. It is NOT a
+    consumer data right. There is no United Kingdom equivalent of the Australian
+    Consumer Data Right for energy and no Ontario-style Green Button regulation.
+    Consumers reach their own consumption data through their supplier or an in-home
+    display, not through a portability API mandated of Smart DCC.
+  status_evidence: |
+    Recorded as live-implemented for the INFRASTRUCTURE mandate only, and only
+    because the mandated interface is verifiably real and published, not merely
+    claimed:
+      - DCC User Interface Specification V5.3 (18 Mar 2025) fetched directly, HTTP 200,
+        application/pdf, 5,133,567 bytes:
+        https://www.smartdcc.co.uk/media/d5kh4khf/dcc-user-interface-specification-v53-18-mar-2025.pdf
+      - SEC Appendix AD 'DCC User Interface Specification (DUIS)' HTTP 200 (application/pdf):
+        https://smartenergycodecompany.co.uk/documents/sec-subsidiary-documents/sec-appendix-ad-dcc-user-interface-specification-duis/
+      - SEC Appendix AE 'DCC User Interface Code of Connection' HTTP 200 (application/pdf):
+        https://smartenergycodecompany.co.uk/documents/sec-subsidiary-documents/sec-appendix-ae-dcc-user-interface-code-of-connection/
+      - DUIS XML Schema V5.1 HTTP 200 (docx):
+        https://www.smartdcc.co.uk/media/6490/duis-xml-schema-v51.docx
+      - Live network operating statistics rendered publicly at
+        https://www.smartdcc.co.uk/our-smart-network/network-data-dashboard/ (HTTP 200)
+    IMPORTANT SEPARATION OF FACTS: an infrastructure mandate being live is NOT a
+    consumer data right being live. No consumer data-portability obligation applies
+    to Smart DCC and none was found implemented. Nothing here should be read as
+    UK compliance with CDR-energy or Green Button — neither applies.
+  consumer_data_right: none
+  consumer_data_right_note: |
+    No CDR-energy designation, no Green Button regulation, no accredited-recipient
+    register, and no consumer consent API were found for Smart DCC or for the UK
+    energy sector generally. The UK Smart Data / Data (Use and Access) framework has
+    not, as of this review, produced a live energy consumer data-portability API
+    obligation on the DCC. Recorded as `none`, not as `designated-not-live`, because
+    no designation was found at all.
+
+data_standard:
+  primary: DUIS (DCC User Interface Specification) v5.3 — XML web service, plus GBCS
+    (Great Britain Companion Specification), SMETS2 device specification, and SMKI
+    (Smart Metering Key Infrastructure) PKI. UK-specific, defined in the Smart Energy
+    Code — not an international standard.
+  green_button: not implemented — no ESPI/Green Button reference found
+  cdr_consumer_data_standards: not applicable — Australia-only regime
+  ocpp_ocpi_openadr_ieee2030_5: no reference found
+  iec_cim: no reference found
+  note: |
+    DUIS is a national, code-governed XML contract rather than a REST/OpenAPI
+    surface. The only OpenAPI document Smart DCC publishes anywhere is for the
+    DCC Boxed signing tool (see harvested_specs below).
+
+consumer_vs_market_data:
+  consumer_data_api: false
+  consumer_data_note: |
+    Smart DCC carries individual premises consumption data across its network, but it
+    does not offer any third party a documented API to obtain an individual customer's
+    usage or billing data on a consent basis. Data flows to SEC Parties (suppliers,
+    network operators, and SEC 'Other User' roles) over DUIS, and eligibility is a
+    matter of code accession and regulated role, not developer signup. No consent API,
+    no accredited-recipient register, no public base URI.
+  market_data_open: false
+  market_data_note: |
+    Smart DCC publishes national network statistics — meters connected, SMETS1 vs
+    SMETS2 split, premises and devices, monthly message volumes, switches processed,
+    CO2 saved — on a public web dashboard at
+    https://www.smartdcc.co.uk/our-smart-network/network-data-dashboard/ (HTTP 200).
+    This is a rendered page. No API, no bulk download, no documented open data feed,
+    and no data licence was found. Recorded as false: viewable is not open.
+    THE SPLIT IS THE FINDING: the interface SPECIFICATION is fully open (DUIS PDF and
+    XML schema are free public downloads), while both the consumer-data side and the
+    market-data side are closed. Britain published the contract and withheld the data.
+    Open UK energy market data lives elsewhere in the value chain — NESO Carbon
+    Intensity, Elexon BMRS, and DNO open-data portals — not at the DCC.
+
+access:
+  gate: application-approval
+  developer_portal: none-published
+  portal_confirmed: false
+  what_a_developer_must_do: |
+    There is no self-serve developer portal. Per
+    https://www.smartdcc.co.uk/partner-with-the-dcc/ (HTTP 200) the sequence is:
+      1. Accede to the Smart Energy Code and become a SEC Party via the Smart Energy
+         Code Administrator (smartenergycodecompany.co.uk).
+      2. Order a DCC User Gateway Connection from the DCC Customer Service Centre.
+      3. Build or buy a DUIS implementation (the XML web service).
+      4. Obtain SMKI organisation certificates and follow the SMKI Registration
+         Authority Policies and Procedures.
+      5. Pass SMKI and Repository Entry Process Testing (SREPT).
+      6. Pass User Entry Process Testing (UEPT).
+    For testing only, DCC Boxed is a physical emulation kit sold at GBP 5,500 (standard
+    kit; device emulators GBP 250 each). SEC Parties may purchase directly; non-SEC
+    Parties must apply to become a Testing Participant via service.centre@smartdcc.co.uk.
+    Source: https://www.smartdcc.co.uk/our-smart-network/network-products-services/dcc-boxed/
+  gated: true
+
+auth:
+  model: |
+    Mutual-authenticated XML web service with XML digital signatures. DUIS messages are
+    signed and validated using SMKI (Smart Metering Key Infrastructure) organisation
+    certificates — a dedicated PKI defined in the Smart Energy Code — with the DCC User
+    Interface Code of Connection (SEC Appendix AE) governing transport. Device-level
+    commands additionally use device certificates. DCC Boxed test environments use the
+    self-contained ZAZ1 test PKI with Z1ZA certificates.
+  api_keys: false
+  oauth2: false
+  openid_connect:
+    served: false
+    probe: https://www.smartdcc.co.uk/.well-known/openid-configuration — HTTP 404
+  mtls_pki: true
+
+home_market: United Kingdom
+tier: metering
+value_chain_position: |
+  Licensed monopoly communications infrastructure. Not a retailer, not a network
+  operator, not a market operator. Sits between meters/comms hubs at the edge and
+  SEC Parties (suppliers, DNOs/GDNs, Other Users) at the north side.
+
+probes:
+- url: https://smartdcc.co.uk
+  status: 200
+  note: redirects to https://www.smartdcc.co.uk/
+- url: https://www.smartdcc.co.uk
+  status: 200
+- url: https://developer.smartdcc.co.uk
+  status: 0
+  note: DNS does not resolve / no connection
+- url: https://developers.smartdcc.co.uk
+  status: 0
+  note: DNS does not resolve / no connection
+- url: https://docs.smartdcc.co.uk
+  status: 0
+  note: DNS does not resolve / no connection
+- url: https://api.smartdcc.co.uk
+  status: 0
+  note: DNS does not resolve / no connection
+- url: https://data.smartdcc.co.uk
+  status: 0
+  note: DNS does not resolve / no connection
+- url: https://www.smartdcc.co.uk/developers
+  status: 404
+- url: https://www.smartdcc.co.uk/api
+  status: 404
+- url: https://www.smartdcc.co.uk/docs
+  status: 404
+- url: https://www.smartdcc.co.uk/data
+  status: 404
+- url: https://www.smartdcc.co.uk/openapi.json
+  status: 404
+- url: https://www.smartdcc.co.uk/swagger.json
+  status: 404
+- url: https://www.smartdcc.co.uk/api-docs
+  status: 404
+- url: https://www.smartdcc.co.uk/.well-known/openid-configuration
+  status: 404
+- url: https://www.smartdcc.co.uk/document-centre/
+  status: 200
+- url: https://www.smartdcc.co.uk/partner-with-the-dcc/
+  status: 200
+- url: https://www.smartdcc.co.uk/our-smart-network/network-data-dashboard/
+  status: 200
+- url: https://www.smartdcc.co.uk/our-smart-network/network-products-services/dcc-boxed/
+  status: 200
+- url: https://www.smartdcc.co.uk/enabling-innovation/using-smart-meter-system-data-for-public-good/
+  status: 200
+  note: advocacy for a future smart-meter data institution; no current API or portal named
+- url: https://www.smartdcc.co.uk/media/d5kh4khf/dcc-user-interface-specification-v53-18-mar-2025.pdf
+  status: 200
+- url: https://www.smartdcc.co.uk/media/6490/duis-xml-schema-v51.docx
+  status: 200
+- url: https://smartenergycodecompany.co.uk/documents/sec-subsidiary-documents/sec-appendix-ad-dcc-user-interface-specification-duis/
+  status: 200
+- url: https://smartenergycodecompany.co.uk/documents/sec-subsidiary-documents/sec-appendix-ae-dcc-user-interface-code-of-connection/
+  status: 200
+- url: https://github.com/SmartDCCInnovation
+  status: 200
+  note: official Smart DCC Limited open-source organisation; 7 public repos
+- url: https://raw.githubusercontent.com/SmartDCCInnovation/dccboxed-signing-tool/main/openapi.yaml
+  status: 200
+  note: the only OpenAPI document found anywhere in the Smart DCC estate
+
+harvested_specs:
+- path: openapi/dcc-boxed-duis-signing-tool-openapi.yml
+  source_url: https://raw.githubusercontent.com/SmartDCCInnovation/dccboxed-signing-tool/main/openapi.yaml
+  fetched: '2026-07-27'
+  http_status: 200
+  format: OpenAPI 3.0.3
+  parsed: true
+  title: DCC Boxed DUIS Signing Tool API
+  version: 1.0.0
+  license: GPL-3.0
+  operations:
+  - POST /sign
+  - POST /verify
+  server: http://localhost:8080 (local development server — no hosted endpoint published)
+  note: |
+    Verbatim copy. Published by Smart DCC Limited in its SmartDCCInnovation GitHub
+    organisation. This is a self-hosted developer utility for XML digital signature
+    operations on DUIS messages, not a hosted Smart DCC production API.
+
+open_source:
+  org: https://github.com/SmartDCCInnovation
+  repos:
+  - name: dccboxed-signing-tool
+    description: DCC Boxed DUIS Validation and Signing Tool (Java/Maven; ships openapi.yaml)
+  - name: duis-parser
+    description: Lightweight bi-directional conversion between DUIS and JSON (TypeScript)
+  - name: duis-templates
+    description: Collection of DUIS templates in JSON format
+  - name: duis-sign-wrap
+    description: TypeScript wrapper for dccboxed-signing-tool
+  - name: dccboxed-keystore
+    description: Certificate and key store for DCC Boxed; client code queries the DCC
+      Boxed SMKI certificate search/retrieve service (no public spec published)
+  - name: dccboxed-nodered-nodes
+    description: Node-RED nodes for sending/receiving DUIS requests to a DCC Boxed instance
+  - name: gbcs-parser
+    description: GBCS (Great Britain Companion Specification) parser
+  note: |
+    All published under GPL-3.0. These are client-side tooling for the gated DUIS
+    interface and for the paid DCC Boxed test appliance. None of them provides a
+    developer with access to live smart metering data.
+
+not_found:
+- A self-serve developer portal or API console
+- A public REST/JSON API of any kind operated by Smart DCC
+- Any consumer usage, billing, tariff, or consent API
+- Any open data API, bulk download, or data licence for the network dashboard figures
+- Green Button / ESPI, CDR Consumer Data Standards, OCPP, OCPI, OpenADR, IEEE 2030.5,
+  or IEC CIM references
+- OAuth 2.0, OpenID Connect, or API key issuance of any kind
+
+sources:
+- url: https://www.smartdcc.co.uk/
+  type: Website
+  note: Organisation identity and role in the GB smart metering rollout.
+- url: https://www.smartdcc.co.uk/partner-with-the-dcc/
+  type: Onboarding
+  note: Definitive statement of the access path — SEC accession, DCC User Gateway
+    Connection, build/buy DUIS, SMKI, SREPT, UEPT.
+- url: https://www.smartdcc.co.uk/our-smart-network/network-products-services/dcc-boxed/
+  type: Product
+  note: DCC Boxed pricing, SEC vs non-SEC Party eligibility, DUIS/GBCS/SMETS2/Z1ZA scope.
+- url: https://smartenergycodecompany.co.uk/the-smart-energy-code/
+  type: Regulation
+  note: The industry code that governs the DCC and defines the DUIS as a subsidiary document.
+- url: https://github.com/SmartDCCInnovation/dccboxed-signing-tool
+  type: SourceCode
+  note: Source of the only harvested OpenAPI document.

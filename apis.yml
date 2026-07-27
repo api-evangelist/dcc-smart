@@ -1,0 +1,98 @@
+aid: dcc-smart
+url: https://raw.githubusercontent.com/api-evangelist/dcc-smart/refs/heads/main/apis.yml
+name: Smart DCC
+kind: company
+description: Smart DCC (the Data Communications Company) is the Ofgem-licensed monopoly
+  that operates Britain's national smart metering communications network, connecting
+  electricity and gas smart meters in homes and businesses to energy suppliers, network
+  operators and other authorised users over a single secure wide-area network. It sits
+  in the middle of the United Kingdom energy value chain as shared infrastructure rather
+  than as a retailer or a data marketplace, and it is regulated through the Smart Meter
+  Communication Licence and governed by the Smart Energy Code. Its API posture reflects
+  that position exactly. Britain mandated the infrastructure, not a consumer data right
+  — there is no UK equivalent of the Australian Consumer Data Right for energy, so
+  Smart DCC operates no consumer data-portability API and publishes no Green Button or
+  Consumer Data Standards surface. The real production interface is the DCC User
+  Interface Specification (DUIS), an XML web service reached over a DCC User Gateway
+  Connection, plus the Self-Service Interface; the DUIS specification and its XML
+  schema are published openly as Smart Energy Code subsidiary documents, but the
+  gateway itself is closed to anyone who has not acceded to the Smart Energy Code and
+  passed SMKI and User Entry Process Testing. The only self-serve, machine-readable
+  contract Smart DCC publishes is an OpenAPI for the open-source DCC Boxed DUIS signing
+  and validation tool on GitHub. Network statistics are shown on a public dashboard as
+  a rendered web page with no documented open data API or bulk download, so both the
+  consumer-data and market-data sides are effectively closed while the interface
+  specification itself is open.
+image: https://www.smartdcc.co.uk/assets/images/favicon.ico
+tags:
+- Energy
+- United Kingdom
+- Utilities
+- Electricity
+- Gas
+- Smart Metering
+- Grid
+- Metering Infrastructure
+- Energy Data
+created: '2026-07-27'
+modified: '2026-07-27'
+specificationVersion: '0.19'
+apis:
+- aid: dcc-smart:dcc-boxed-duis-signing-tool-api
+  name: DCC Boxed DUIS Signing Tool API
+  description: An open-source HTTP API published by Smart DCC Limited for signing and
+    validating DUIS (DCC User Interface Specification) XML messages. Two operations —
+    POST /sign adds an XML digital signature to a Base64-encoded unsigned DUIS request
+    (with an optional preserveCounter flag), and POST /verify validates the signature
+    on a DUIS response and strips it. The tool ships with the ZAZ1 test SMKI certificates
+    used by DCC Boxed and also performs XSD validation. It runs locally as a self-hosted
+    server; Smart DCC operates no public hosted instance.
+  humanURL: https://github.com/SmartDCCInnovation/dccboxed-signing-tool
+  baseURL: http://localhost:8080
+  tags:
+  - Smart Metering
+  - DUIS
+  - Signing
+  - Validation
+  - Testing
+  properties:
+  - type: OpenAPI
+    url: openapi/dcc-boxed-duis-signing-tool-openapi.yml
+  - type: Documentation
+    url: https://github.com/SmartDCCInnovation/dccboxed-signing-tool
+  - type: SourceCode
+    url: https://github.com/SmartDCCInnovation/dccboxed-signing-tool
+  - type: Specification
+    url: https://smartenergycodecompany.co.uk/documents/sec-subsidiary-documents/sec-appendix-ad-dcc-user-interface-specification-duis/
+common:
+- type: Website
+  url: https://www.smartdcc.co.uk/
+- type: About
+  url: https://www.smartdcc.co.uk/about-dcc/
+- type: Contact
+  url: https://www.smartdcc.co.uk/contact-us/
+- type: Blog
+  url: https://www.smartdcc.co.uk/news-events/
+- type: GitHubOrganization
+  url: https://github.com/SmartDCCInnovation
+- type: Documentation
+  url: https://www.smartdcc.co.uk/document-centre/
+- type: Onboarding
+  url: https://www.smartdcc.co.uk/partner-with-the-dcc/
+- type: Specification
+  url: https://www.smartdcc.co.uk/media/d5kh4khf/dcc-user-interface-specification-v53-18-mar-2025.pdf
+- type: Specification
+  url: https://smartenergycodecompany.co.uk/documents/sec-subsidiary-documents/sec-appendix-ad-dcc-user-interface-specification-duis/
+- type: Specification
+  url: https://smartenergycodecompany.co.uk/documents/sec-subsidiary-documents/sec-appendix-ae-dcc-user-interface-code-of-connection/
+- type: Schema
+  url: https://www.smartdcc.co.uk/media/6490/duis-xml-schema-v51.docx
+- type: Dashboard
+  url: https://www.smartdcc.co.uk/our-smart-network/network-data-dashboard/
+- type: Products
+  url: https://www.smartdcc.co.uk/our-smart-network/network-products-services/dcc-boxed/
+- type: Regulation
+  url: https://smartenergycodecompany.co.uk/the-smart-energy-code/
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com
