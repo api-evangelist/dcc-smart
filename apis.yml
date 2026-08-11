@@ -77,6 +77,13 @@ apis:
   - type: AgentSkill
     url: skills/_index.yml
 common:
+- type: MCPServer
+  url: mcp/dcc-smart-mcp.yml
+- type: IssueTracker
+  url: https://github.com/SmartDCCInnovation/dccboxed-signing-tool/issues
+- type: License
+  name: GPL-3.0
+  url: https://github.com/SmartDCCInnovation/dccboxed-signing-tool/blob/main/LICENSE
 - type: AgenticAccess
   url: agentic-access/dcc-smart-agentic-access.yml
 - type: DomainSecurity
