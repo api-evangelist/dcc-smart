@@ -36,7 +36,7 @@ tags:
 - Energy Data
 created: '2026-07-27'
 modified: '2026-07-27'
-specificationVersion: '0.19'
+specificationVersion: '0.23'
 apis:
 - aid: dcc-smart:dcc-boxed-duis-signing-tool-api
   name: DCC Boxed DUIS Signing Tool API
