@@ -1,0 +1,40 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "DCC Boxed DUIS Signing Tool API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Sign a DUIS request",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "http://localhost:8080/sign",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "Signs a DUIS XML message and returns the signed XML with digital signature"
+    },
+    {
+      "info": {
+        "name": "Verify a DUIS response",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "http://localhost:8080/verify",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "Validates a signed DUIS XML message and returns the unsigned XML"
+    }
+  ],
+  "bundled": true
+}

@@ -2,13 +2,12 @@ generated: '2026-07-27'
 method: derived
 source: openapi/dcc-boxed-duis-signing-tool-openapi.yml
 status: candidate
-summary: >-
-  No official hosted or remote Model Context Protocol server was found for Smart DCC.
-  Searched the smartdcc.co.uk site and sitemap, the SmartDCCInnovation GitHub organisation
-  (8 repositories), and the npm @smartdcc scope (6 packages) — none is an MCP server, and
-  no mcp.smartdcc.co.uk or equivalent host resolves. The tool set below is DERIVED from the
-  two operations in the published OpenAPI as a proposal for an agent-facing surface. It is
-  not published by Smart DCC and no apis.yml MCPServer pointer is wired for it.
+summary: No official hosted or remote Model Context Protocol server was found for Smart DCC. Searched
+  the smartdcc.co.uk site and sitemap, the SmartDCCInnovation GitHub organisation (8 repositories), and
+  the npm @smartdcc scope (6 packages) — none is an MCP server, and no mcp.smartdcc.co.uk or equivalent
+  host resolves. The tool set below is DERIVED from the two operations in the published OpenAPI as a proposal
+  for an agent-facing surface. It is not published by Smart DCC and no apis.yml MCPServer pointer is wired
+  for it.
 server: null
 transport: null
 auth:
@@ -18,26 +17,29 @@ candidate_tools:
 - name: sign_duis_message
   maps_to: POST /sign
   source_operation: openapi/dcc-boxed-duis-signing-tool-openapi.yml#signMessage
-  description: >-
-    Add an XML digital signature to a Base64-encoded unsigned DUIS request, optionally
-    preserving the caller's originator counter.
-  input_schema_source: >-
-    requestBody of signMessage — message (string/byte, required), preserveCounter
-    (boolean, optional)
+  description: Add an XML digital signature to a Base64-encoded unsigned DUIS request, optionally preserving
+    the caller's originator counter.
+  input_schema_source: requestBody of signMessage — message (string/byte, required), preserveCounter (boolean,
+    optional)
 - name: verify_duis_message
   maps_to: POST /verify
   source_operation: openapi/dcc-boxed-duis-signing-tool-openapi.yml#verifyMessage
-  description: >-
-    Validate the digital signature and DUIS XSD of a Base64-encoded signed DUIS response and
+  description: Validate the digital signature and DUIS XSD of a Base64-encoded signed DUIS response and
     return it with the signature removed.
-  input_schema_source: >-
-    requestBody of verifyMessage — message (string/byte, required)
+  input_schema_source: requestBody of verifyMessage — message (string/byte, required)
 agent_notes:
-- Both operations mutate cryptographic material and should be treated as acting/write —
-  see agentic-access/dcc-smart-agentic-access.yml.
-- The tool ships ZAZ1 TEST key material only; an agent using it is signing for a test PKI,
-  never for the live DCC network.
+- Both operations mutate cryptographic material and should be treated as acting/write — see agentic-access/dcc-smart-agentic-access.yml.
+- The tool ships ZAZ1 TEST key material only; an agent using it is signing for a test PKI, never for the
+  live DCC network.
 searched:
-- {surface: https://www.smartdcc.co.uk/sitemap.xml, result: no MCP reference}
-- {surface: https://github.com/SmartDCCInnovation, result: no MCP server repository}
-- {surface: npm @smartdcc scope, result: no MCP package}
+- surface: https://www.smartdcc.co.uk/sitemap.xml
+  result: no MCP reference
+- surface: https://github.com/SmartDCCInnovation
+  result: no MCP server repository
+- surface: npm @smartdcc scope
+  result: no MCP package
+deployment:
+  mode: none
+  verified: derived
+  checked: '2026-08-12'
+  source: catalog MCP census
