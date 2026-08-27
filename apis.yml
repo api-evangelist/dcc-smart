@@ -38,34 +38,23 @@ created: '2026-07-27'
 modified: '2026-07-27'
 specificationVersion: '0.23'
 apis:
-- aid: dcc-smart:dcc-boxed-duis-signing-tool-api
-  name: DCC Boxed DUIS Signing Tool API
-  description: An open-source HTTP API published by Smart DCC Limited for signing and
-    validating DUIS (DCC User Interface Specification) XML messages. Two operations —
-    POST /sign adds an XML digital signature to a Base64-encoded unsigned DUIS request
-    (with an optional preserveCounter flag), and POST /verify validates the signature
-    on a DUIS response and strips it. The tool ships with the ZAZ1 test SMKI certificates
-    used by DCC Boxed and also performs XSD validation. It runs locally as a self-hosted
-    server; Smart DCC operates no public hosted instance.
+- aid: dcc-smart:dcc-smart-sign-api
+  name: Smart DCC Sign API
+  description: The Sign API from Smart DCC — 1 operation(s) for sign.
   humanURL: https://github.com/SmartDCCInnovation/dccboxed-signing-tool
   baseURL: http://localhost:8080
   tags:
-  - Smart Metering
-  - DUIS
-  - Signing
-  - Validation
-  - Testing
+  - Sign
   properties:
   - type: OpenAPI
-    url: openapi/dcc-boxed-duis-signing-tool-openapi.yml
+    url: openapi/dcc-smart-sign-api-openapi.yml
   - type: Documentation
     url: https://github.com/SmartDCCInnovation/dccboxed-signing-tool
   - type: SourceCode
     url: https://github.com/SmartDCCInnovation/dccboxed-signing-tool
   - type: Specification
-    url: https://smartenergycodecompany.co.uk/documents/sec-subsidiary-documents/sec-appendix-ad-dcc-user-interface-specification-duis/
-  - type: Overlay
-    url: overlays/dcc-smart-dcc-boxed-duis-signing-tool-overlay.yaml
+    url: >-
+      https://smartenergycodecompany.co.uk/documents/sec-subsidiary-documents/sec-appendix-ad-dcc-user-interface-specification-duis/
   - type: Authentication
     url: authentication/dcc-smart-authentication.yml
   - type: Conventions
@@ -74,9 +63,36 @@ apis:
     url: errors/dcc-smart-problem-types.yml
   - type: DataModel
     url: data-model/dcc-smart-data-model.yml
-  - type: AgentSkill
-    url: skills/_index.yml
+- aid: dcc-smart:dcc-smart-verify-api
+  name: Smart DCC Verify API
+  description: The Verify API from Smart DCC — 1 operation(s) for verify.
+  humanURL: https://github.com/SmartDCCInnovation/dccboxed-signing-tool
+  baseURL: http://localhost:8080
+  tags:
+  - Verify
+  properties:
+  - type: OpenAPI
+    url: openapi/dcc-smart-verify-api-openapi.yml
+  - type: Documentation
+    url: https://github.com/SmartDCCInnovation/dccboxed-signing-tool
+  - type: SourceCode
+    url: https://github.com/SmartDCCInnovation/dccboxed-signing-tool
+  - type: Specification
+    url: >-
+      https://smartenergycodecompany.co.uk/documents/sec-subsidiary-documents/sec-appendix-ad-dcc-user-interface-specification-duis/
+  - type: Authentication
+    url: authentication/dcc-smart-authentication.yml
+  - type: Conventions
+    url: conventions/dcc-smart-conventions.yml
+  - type: ErrorCatalog
+    url: errors/dcc-smart-problem-types.yml
+  - type: DataModel
+    url: data-model/dcc-smart-data-model.yml
 common:
+- type: Overlay
+  url: overlays/dcc-smart-dcc-boxed-duis-signing-tool-overlay.yaml
+- type: AgentSkill
+  url: skills/_index.yml
 - type: MCPServer
   url: mcp/dcc-smart-mcp.yml
 - type: IssueTracker
