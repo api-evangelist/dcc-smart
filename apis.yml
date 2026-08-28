@@ -23,6 +23,20 @@ description: Smart DCC (the Data Communications Company) is the Ofgem-licensed m
   a rendered web page with no documented open data API or bulk download, so both the
   consumer-data and market-data sides are effectively closed while the interface
   specification itself is open.
+deliveryModel:
+  model: open-core
+  license: GPL-3.0
+  open_source: true
+  commercial: true
+  callable_host: false
+  label: Open core · an OSS project plus a commercial hosted product
+  confidence: high
+  source:
+  - license
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 image: https://www.smartdcc.co.uk/assets/images/favicon.ico
 tags:
 - Energy
