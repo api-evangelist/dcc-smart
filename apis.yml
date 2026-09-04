@@ -37,6 +37,21 @@ deliveryModel:
   - pricing
   generated: '2026-08-28'
   method: derived
+accessModel:
+  pricing: unknown
+  onboarding: open
+  trial: false
+  try_now: false
+  public: false
+  label: Open access
+  confidence: medium
+  try_now_blocked_by: loopback
+  source:
+  - authentication
+  - security
+  - sandbox
+  generated: '2026-09-02'
+  method: derived
 image: https://www.smartdcc.co.uk/assets/images/favicon.ico
 tags:
 - Energy
@@ -107,8 +122,9 @@ common:
   url: overlays/dcc-smart-dcc-boxed-duis-signing-tool-overlay.yaml
 - type: AgentSkill
   url: skills/_index.yml
-- type: MCPServer
+- type: X-MCPServerCandidate
   url: mcp/dcc-smart-mcp.yml
+  note: 'Renamed from MCPServer 2026-09-03 (roadmap#247): the manifest self-describes as status: candidate — a tool list derived from the published API contracts, not an existing server. The scorer already read the manifest and reported mcp_server correctly; the MCPServer type was crediting the artifact-type surfaces with a server that does not exist.'
 - type: IssueTracker
   url: https://github.com/SmartDCCInnovation/dccboxed-signing-tool/issues
 - type: License
