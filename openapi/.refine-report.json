@@ -1,0 +1,26 @@
+{
+  "provider": "dcc-smart",
+  "sources": [
+    "_original/dcc-boxed-duis-signing-tool-openapi.yml"
+  ],
+  "outputs": [
+    "dcc-smart-sign-api-openapi.yml",
+    "dcc-smart-verify-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "dcc-boxed-duis-signing-tool-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "dcc-boxed-duis-signing-tool-openapi.yml: tagged paths POST /sign -> Sign",
+    "dcc-boxed-duis-signing-tool-openapi.yml: tagged paths POST /verify -> Verify",
+    "dcc-boxed-duis-signing-tool-openapi.yml: declared missing tag: Sign",
+    "dcc-boxed-duis-signing-tool-openapi.yml: declared missing tag: Verify",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "dcc-smart-sign-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "dcc-smart-verify-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
+}
