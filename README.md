@@ -1,4 +1,4 @@
-# Smart DCC (dcc-smart)
+# Smart DCC
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,76 +66,132 @@
 
 Smart DCC (the Data Communications Company) is the Ofgem-licensed monopoly that operates Britain's national smart metering communications network, connecting electricity and gas smart meters in homes and businesses to energy suppliers, network operators and other authorised users over a single secure wide-area network. It sits in the middle of the United Kingdom energy value chain as shared infrastructure rather than as a retailer or a data marketplace, and it is regulated through the Smart Meter Communication Licence and governed by the Smart Energy Code. Its API posture reflects that position exactly. Britain mandated the infrastructure, not a consumer data right — there is no UK equivalent of the Australian Consumer Data Right for energy, so Smart DCC operates no consumer data-portability API and publishes no Green Button or Consumer Data Standards surface. The real production interface is the DCC User Interface Specification (DUIS), an XML web service reached over a DCC User Gateway Connection, plus the Self-Service Interface; the DUIS specification and its XML schema are published openly as Smart Energy Code subsidiary documents, but the gateway itself is closed to anyone who has not acceded to the Smart Energy Code and passed SMKI and User Entry Process Testing. The only self-serve, machine-readable contract Smart DCC publishes is an OpenAPI for the open-source DCC Boxed DUIS signing and validation tool on GitHub. Network statistics are shown on a public dashboard as a rendered web page with no documented open data API or bulk download, so both the consumer-data and market-data sides are effectively closed while the interface specification itself is open.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/dcc-smart/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/dcc-smart/refs/heads/main/apis.yml)
+**Areas:** Energy · United Kingdom · Utilities · Electricity · Gas · Smart Metering · Grid · Metering Infrastructure · Energy Data
 
-## Tags
+## Smart DCC on APIs.io
 
-- Energy
-- United Kingdom
-- Utilities
-- Electricity
-- Gas
-- Smart Metering
-- Grid
-- Metering Infrastructure
-- Energy Data
+Everything profiled for Smart DCC is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/dcc-smart/](https://apis.io/providers/dcc-smart/)** — or go straight to one of the APIs or properties below.
 
-## Timestamps
+### APIs (2)
 
-- **Created:** 2026-07-27
-- **Modified:** 2026-07-27
+- [Smart DCC Sign API](https://apis.io/apis/dcc-smart/dcc-smart-sign-api/) — The Sign API from Smart DCC — 1 operation(s) for sign.
+- [Smart DCC Verify API](https://apis.io/apis/dcc-smart/dcc-smart-verify-api/) — The Verify API from Smart DCC — 1 operation(s) for verify.
 
-## APIs
+### Published properties
 
-### DCC Boxed DUIS Signing Tool API
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-An open-source HTTP API published by Smart DCC Limited for signing and validating DUIS (DCC User Interface Specification) XML messages. Two operations — `POST /sign` adds an XML digital signature to a Base64-encoded unsigned DUIS request (with an optional `preserveCounter` flag), and `POST /verify` validates the signature on a DUIS response and strips it. The tool ships with the ZAZ1 test SMKI certificates used by DCC Boxed and also performs XSD validation. It runs locally as a self-hosted server; Smart DCC operates no public hosted instance.
+#### MCP servers (1)
 
-- **Human URL:** [https://github.com/SmartDCCInnovation/dccboxed-signing-tool](https://github.com/SmartDCCInnovation/dccboxed-signing-tool)
-- **Base URL:** `http://localhost:8080`
+Model Context Protocol servers that expose the API to agents.
 
-#### Tags
+- [dcc-smart-mcp.yml](https://apis.io/servers/dcc-smart/dcc-smart-mcp-yml/)
 
-- Smart Metering
-- DUIS
-- Signing
-- Validation
-- Testing
+#### Agentic access (1)
 
-#### Properties
+Which operations an agent can call, which act, and which need a human in the loop.
 
-- [OpenAPI](openapi/dcc-boxed-duis-signing-tool-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Documentation](https://github.com/SmartDCCInnovation/dccboxed-signing-tool)
-- [Source Code](https://github.com/SmartDCCInnovation/dccboxed-signing-tool)
-- [Specification](https://smartenergycodecompany.co.uk/documents/sec-subsidiary-documents/sec-appendix-ad-dcc-user-interface-specification-duis/)
+- [Dcc Smart Agentic Access](https://apis.io/agentic-access/dcc-smart/dcc-smart-agentic-access/)
 
-## Common Properties
+#### JSON Schema (1)
+
+The data models the API reads and writes.
+
+- [Dcc Smart Dccboxed Keystore](https://apis.io/schemas/dcc-smart/dcc-smart-dccboxed-keystore/)
+
+#### Vocabulary (1)
+
+The provider's domain terms, defined.
+
+- [Dcc Smart Vocabulary](https://apis.io/vocabularies/dcc-smart/dcc-smart-vocabulary/)
+
+#### Collections (1)
+
+Postman and Open Collection request collections.
+
+- [DCC Boxed DUIS Signing Tool API](https://apis.io/collections/dcc-smart/open-dcc-boxed-duis-signing-tool/)
+
+#### Overlays (1)
+
+OpenAPI overlays, including conversational phrasing for each operation.
+
+- [Dcc Smart Dcc Boxed Duis Signing Tool Overlay](https://apis.io/overlays/dcc-smart/dcc-smart-dcc-boxed-duis-signing-tool-overlay/)
+
+#### Security (3)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Dcc Smart Authentication](https://apis.io/security/dcc-smart/dcc-smart-authentication/)
+- [Dcc Smart Domain Security](https://apis.io/security/dcc-smart/dcc-smart-domain-security/)
+- [Dcc Smart Vulnerability Disclosure](https://apis.io/security/dcc-smart/dcc-smart-vulnerability-disclosure/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
 
 - [Website](https://www.smartdcc.co.uk/)
-- [About](https://www.smartdcc.co.uk/about-dcc/)
-- [Contact](https://www.smartdcc.co.uk/contact-us/)
-- [Blog](https://www.smartdcc.co.uk/news-events/)
-- [GitHub Organization](https://github.com/SmartDCCInnovation)
 - [Documentation](https://www.smartdcc.co.uk/document-centre/)
-- [Onboarding](https://www.smartdcc.co.uk/partner-with-the-dcc/)
-- [Specification — DUIS v5.3 (PDF)](https://www.smartdcc.co.uk/media/d5kh4khf/dcc-user-interface-specification-v53-18-mar-2025.pdf)
-- [Specification — SEC Appendix AD (DUIS)](https://smartenergycodecompany.co.uk/documents/sec-subsidiary-documents/sec-appendix-ad-dcc-user-interface-specification-duis/)
-- [Specification — SEC Appendix AE (DCC User Interface Code of Connection)](https://smartenergycodecompany.co.uk/documents/sec-subsidiary-documents/sec-appendix-ae-dcc-user-interface-code-of-connection/)
-- [Schema — DUIS XML Schema V5.1](https://www.smartdcc.co.uk/media/6490/duis-xml-schema-v51.docx)
-- [Dashboard](https://www.smartdcc.co.uk/our-smart-network/network-data-dashboard/)
-- [Products — DCC Boxed](https://www.smartdcc.co.uk/our-smart-network/network-products-services/dcc-boxed/)
-- [Regulation — Smart Energy Code](https://smartenergycodecompany.co.uk/the-smart-energy-code/)
+- [Pricing](https://www.smartdcc.co.uk/about-dcc/governance-regulations/charges/)
+- [Support](https://www.smartdcc.co.uk/contact-us-service-users/)
+- [Changelog](https://github.com/SmartDCCInnovation/dccboxed-signing-tool/releases)
+- [Blog](https://www.smartdcc.co.uk/news-events/)
+- [Security](https://www.smartdcc.co.uk/media/sn5dn4hr/information-security-policy-3.pdf)
+- [Compliance](https://www.smartdcc.co.uk/about-dcc/governance-regulations/governance-reports-policies/)
+- [Privacy policy](https://www.smartdcc.co.uk/privacy-notice/)
+- [GitHub](https://github.com/SmartDCCInnovation)
+- [Status](https://www.smartdcc.co.uk/our-smart-network/network-data-dashboard/performance/)
 
-## Mandate and Access Posture
+## API Evangelist rating
 
-- **Mandate regime:** `smart-meter-infrastructure` — the Smart Meter Communication Licence and the Smart Energy Code compel the *network*, not consumer data portability.
-- **Mandate status:** `live-implemented` for the infrastructure mandate only. Verified by fetching the DUIS v5.3 specification (HTTP 200), the DUIS XML Schema V5.1 (HTTP 200), and SEC Appendices AD and AE (HTTP 200), plus the live public network dashboard.
-- **Consumer data right:** none. No UK CDR-energy equivalent, no Green Button regulation, no accredited-recipient register.
-- **Data standard:** DUIS v5.3 / GBCS / SMETS2 / SMKI — UK-specific, code-governed XML. No Green Button, CDR Consumer Data Standards, OCPP, OCPI, OpenADR, IEEE 2030.5, or IEC CIM reference found.
-- **Consumer data API:** no. **Open market data API:** no — the network dashboard is a rendered page with no feed or download.
-- **Access gate:** `application-approval`. Accede to the Smart Energy Code, order a DCC User Gateway Connection, build or buy a DUIS implementation, obtain SMKI certificates, then pass SREPT and UEPT.
-- **Auth model:** SMKI PKI with XML digital signatures over a governed Code of Connection. No API keys, no OAuth 2.0, no OpenID Connect (`/.well-known/openid-configuration` returned HTTP 404).
+**Kin Score 44.8** — developing · rubric 0.25.0 · scored 2026-10-23
 
-## Review
+| Facet | Score |
+|---|---|
+| Discoverability | 64.3 |
+| Contract quality | 43.5 |
+| Contract governance | 22.0 |
+| Operational transparency | 50.0 |
+| Developer ergonomics | 51.8 |
+| Access clarity | 28.9 |
 
-See [review.yml](review.yml) for every URL probed, the HTTP status of each, and the full mandate / consumer-versus-market-data analysis.
+**Agent readiness 29.0** — agent-ready
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | verified |
+| OpenAPI Examples | verified |
+| Rate Limit Signal | — |
+| Event Surface Described | — |
+| Agent Skills | derived (partial credit) |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+| Pagination Ratio | na |
+| Operation Distinctiveness | na |
+
+**Regulatory alignment 32.8** — Energy & Utilities
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/dcc-smart/](https://apis.io/providers/dcc-smart/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Smart DCC: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/dcc-smart/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
